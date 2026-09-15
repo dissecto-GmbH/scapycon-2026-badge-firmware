@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include "badge_name.h"
 #include "board.h"
@@ -12,6 +13,7 @@
 #include "freertos/task.h"
 #include "power.h"
 #include "radio.h"
+#include "time_sync.h"
 #include "utf8_name.h"
 
 static const char *TAG = "ui";
@@ -52,6 +54,10 @@ static bool s_ui_ready;
 static volatile bool s_name_dirty;
 static volatile bool s_sched_dirty;
 static int s_sched_day; /* 0 = day 1, 1 = day 2 */
+static int s_drawn_minute = -1; /* hour*60+min of last painted clock; -1 = none */
+
+#define CLOCK_SCALE 2
+#define CLOCK_MARGIN 8
 
 static const char *const s_day1[] = {
     "ScapyCon 2026 — Day 1",
@@ -198,6 +204,48 @@ static int split_name_words(const char *name, char words[][BADGE_NAME_MAX + 1], 
     return nwords;
 }
 
+static int current_minute_of_day(void)
+{
+    time_t now = time(NULL);
+    struct tm tm;
+    if (localtime_r(&now, &tm) == NULL) {
+        return -1;
+    }
+    return tm.tm_hour * 60 + tm.tm_min;
+}
+
+static void draw_clock(void)
+{
+    if (!badge_time_is_synced()) {
+        s_drawn_minute = -1;
+        return;
+    }
+
+    time_t now = time(NULL);
+    struct tm tm;
+    if (localtime_r(&now, &tm) == NULL) {
+        return;
+    }
+
+    char buf[8];
+    snprintf(buf, sizeof(buf), "%02d:%02d", tm.tm_hour, tm.tm_min);
+
+    int w = string_pixel_width(buf, CLOCK_SCALE);
+    int h = 8 * CLOCK_SCALE;
+    int x = BADGE_LCD_H_RES - CLOCK_MARGIN - w;
+    int y = BADGE_LCD_V_RES - CLOCK_MARGIN - h;
+    if (x < 0) {
+        x = 0;
+    }
+    if (y < 0) {
+        y = 0;
+    }
+
+    badge_display_restore_bg(s_panel, x, y, w, h, COLOR_NAVY);
+    badge_display_draw_string_transparent(s_panel, x, y, buf, COLOR_WHITE, COLOR_NAVY, CLOCK_SCALE);
+    s_drawn_minute = tm.tm_hour * 60 + tm.tm_min;
+}
+
 static void draw_badge_lines(void)
 {
     const char *name = badge_name_get();
@@ -206,6 +254,7 @@ static void draw_badge_lines(void)
     if (nwords <= 0) {
         badge_display_restore_bg(s_panel, TEXT_X, Y_TITLE, TEXT_W, BADGE_LCD_V_RES - Y_TITLE,
                                  COLOR_NAVY);
+        draw_clock();
         return;
     }
 
@@ -229,6 +278,7 @@ static void draw_badge_lines(void)
     for (int i = 0; i < nwords; i++) {
         draw_centered_name(y0 + i * (char_h + gap), words[i], scale, COLOR_BLACK);
     }
+    draw_clock();
 }
 
 static void redraw_mode_content(void)
@@ -282,6 +332,11 @@ static void ui_update(void)
         if (s_name_dirty) {
             draw_badge_lines();
             s_name_dirty = false;
+        } else {
+            int minute = current_minute_of_day();
+            if (badge_time_is_synced() && minute >= 0 && minute != s_drawn_minute) {
+                draw_clock();
+            }
         }
         return;
     }

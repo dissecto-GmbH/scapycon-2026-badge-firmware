@@ -47,6 +47,11 @@ esp_err_t badge_wifi_station_start(void)
 esp_err_t badge_wifi_station_stop(void)
 {
     esp_wifi_disconnect();
-    ESP_LOGI(TAG, "station disconnecting");
+    esp_err_t err = esp_wifi_stop();
+    if (err != ESP_OK && err != ESP_ERR_WIFI_NOT_STARTED) {
+        ESP_LOGW(TAG, "esp_wifi_stop: %s", esp_err_to_name(err));
+        return err;
+    }
+    ESP_LOGI(TAG, "station stopped");
     return ESP_OK;
 }

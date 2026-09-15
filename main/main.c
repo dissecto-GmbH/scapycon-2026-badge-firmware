@@ -8,6 +8,7 @@
 #include "leds.h"
 #include "power.h"
 #include "radio.h"
+#include "time_sync.h"
 #include "ui.h"
 #include "user_store.h"
 
@@ -174,6 +175,7 @@ void app_main(void)
     ESP_ERROR_CHECK(badge_leds_init());
     ESP_ERROR_CHECK(badge_radio_init());
     ESP_ERROR_CHECK(badge_button_init(on_button, NULL));
+    ESP_ERROR_CHECK(badge_time_sync_start());
 
     xTaskCreate(led_task, "leds", 4096, NULL, 5, NULL);
     badge_ui_start();

@@ -16,6 +16,8 @@ esp_err_t badge_radio_set_mode(badge_radio_mode_t mode);
 esp_err_t badge_radio_request_mode(badge_radio_mode_t mode);
 /** Queue an ITS-G5 channel cycle (no-op unless currently sniffing). */
 esp_err_t badge_radio_request_cycle_channel(void);
+/** Queue a brief STA+NTP sync, then stop the radio (skipped while sniffing). */
+esp_err_t badge_radio_request_ntp_sync(void);
 badge_radio_mode_t badge_radio_get_mode(void);
 bool badge_radio_is_badge_mode(void);
 void badge_radio_refresh_power_profile(void);
