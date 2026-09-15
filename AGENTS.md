@@ -61,12 +61,13 @@ First full build takes several minutes. Subsequent builds are incremental.
 
 ```
 badge2026-v2x/
+├── README.md              # human overview
 ├── AGENTS.md              # this file
 ├── partitions.csv         # N4: factory + ota_0 + user
 ├── flashloader/           # factory OTA helper (HTTPS update)
 ├── components/user_store/ # name / wifi / RGB565 bg in user partition
-├── netlist.net            # schematic netlist (source of truth for pins)
-├── schematics.pdf         # PCB schematics (human reference)
+├── netlist.net            # for agents: pin/net source of truth
+├── schematics.pdf         # for humans: PCB schematics PDF
 ├── config/
 │   ├── wifi.conf.example
 │   └── wifi.conf          # gitignored — SSID/password
