@@ -1,0 +1,359 @@
+#include "ui.h"
+
+#include <stdio.h>
+#include <string.h>
+
+#include "badge_name.h"
+#include "board.h"
+#include "display.h"
+#include "esp_lcd_panel_ops.h"
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "power.h"
+#include "radio.h"
+#include "utf8_name.h"
+
+static const char *TAG = "ui";
+
+#define COLOR_NAVY   0x0010
+#define COLOR_GREEN  0x07E0
+#define COLOR_YELLOW 0xFFE0
+#define COLOR_ORANGE 0xFD20
+#define COLOR_WHITE  0xFFFF
+#define COLOR_CYAN   0x07FF
+#define COLOR_BLACK  0x0000
+/* Logo green ≈ #2BAA6F */
+#define COLOR_BRAND  0x2D4D
+
+#define TEXT_X       8
+#define TEXT_W       (BADGE_LCD_H_RES - TEXT_X * 2)
+#define TEXT_SCALE   2
+#define LINE_H       22
+#define CHAR_H       (8 * TEXT_SCALE)
+#define SCHED_SCALE  1
+#define SCHED_LINE_H 9
+
+#define Y_TITLE      12
+#define Y_MODE       (Y_TITLE + CHAR_H + 6)
+#define Y_LINE2      (Y_MODE + LINE_H)
+#define Y_LINE3      (Y_LINE2 + LINE_H)
+
+static esp_lcd_panel_handle_t s_panel;
+
+typedef struct {
+    badge_radio_mode_t mode;
+    uint32_t rx_count;
+    int channel_mhz;
+} ui_state_t;
+
+static ui_state_t s_ui;
+static bool s_ui_ready;
+static volatile bool s_name_dirty;
+static volatile bool s_sched_dirty;
+static int s_sched_day; /* 0 = day 1, 1 = day 2 */
+
+static const char *const s_day1[] = {
+    "ScapyCon 2026 — Day 1",
+    "SW_C toggles Day 1 / Day 2",
+    "",
+    "0800-0900 Registration",
+    "0900-0915 Welcome (Weiss)",
+    "0915-1000 Scapy Keynote (Rey)",
+    "1000-1030 Connected cars (Pozzobon)",
+    "1030-1100 Coffee Break",
+    "1100-1145 V2X Wardriving",
+    "          (Schuster & Puch)",
+    "1145-1230 Garage to CI (Kugler)",
+    "1230-1300 Beyond blind fuzzing",
+    "          (Alkhatib)",
+    "1300-1400 Lunch Break",
+    "1400-1545 Workshop Melching/Horreis",
+    "1545-1600 Coffee break",
+    "1600-1800 Workshop Melching/Horreis",
+    "1900-2300 Social Event",
+};
+
+static const char *const s_day2[] = {
+    "ScapyCon 2026 — Day 2",
+    "SW_C toggles Day 1 / Day 2",
+    "",
+    "0900-0945 Hidden BT (Vasquez Blanco)",
+    "0945-1030 EU Cyber Resilience Act",
+    "          (Funke & Krishnamurthy)",
+    "1030-1100 Coffee break",
+    "1100-1115 Trail of Bits (Thomas)",
+    "1115-1130 Scapy Maintainers (Weiss)",
+    "1130-1215 WHAD demo",
+    "          (Cauquil & Cayre)",
+    "1215-1255 Ethernet to CAN (Wiemer)",
+    "1255-1300 Closing (Meisel)",
+    "1300-1345 Lunch Break",
+    "1345-1545 Workshops",
+    "          Gardiner/Cauquil/Cayre/",
+    "          Bagh/Kopf",
+    "1545-1600 Coffee break",
+    "1600-1800 Workshops (continued)",
+};
+
+static int string_pixel_width(const char *str, int scale)
+{
+    if (!str || !*str) {
+        return 0;
+    }
+    int n = (int)utf8_char_count(str);
+    if (n <= 0) {
+        return 0;
+    }
+    return n * (8 * scale + 1) - 1;
+}
+
+static void draw_centered_name(int y, const char *name, int scale, uint16_t fg)
+{
+    int w = string_pixel_width(name, scale);
+    int x = (BADGE_LCD_H_RES - w) / 2;
+    if (x < TEXT_X) {
+        x = TEXT_X;
+    }
+    badge_display_draw_string_transparent(s_panel, x, y, name, fg, COLOR_NAVY, scale);
+}
+
+static void draw_sniffer_lines(void)
+{
+    badge_display_draw_line(s_panel, TEXT_X, Y_MODE, TEXT_W, "Mode: 802.11p sniffer", COLOR_CYAN,
+                            COLOR_NAVY, TEXT_SCALE);
+
+    char line[32];
+    snprintf(line, sizeof(line), "Packets: %lu", (unsigned long)badge_radio_rx_count());
+    badge_display_draw_line(s_panel, TEXT_X, Y_LINE2, TEXT_W, line, COLOR_GREEN, COLOR_NAVY,
+                            TEXT_SCALE);
+
+    int mhz = badge_radio_its_channel_mhz();
+    snprintf(line, sizeof(line), "Ch: %d MHz %s", mhz, mhz == 5900 ? "G5CC" : "G5SC");
+    badge_display_draw_line(s_panel, TEXT_X, Y_LINE3, TEXT_W, line, COLOR_YELLOW, COLOR_NAVY,
+                            TEXT_SCALE);
+}
+
+static void draw_schedule(void)
+{
+    const char *const *lines = (s_sched_day == 0) ? s_day1 : s_day2;
+    size_t nlines = (s_sched_day == 0) ? (sizeof(s_day1) / sizeof(s_day1[0]))
+                                       : (sizeof(s_day2) / sizeof(s_day2[0]));
+
+    badge_display_fill(s_panel, 0, 0, BADGE_LCD_H_RES, BADGE_LCD_V_RES, COLOR_BRAND);
+
+    int y = 4;
+    for (size_t i = 0; i < nlines; i++) {
+        if (y + 8 > BADGE_LCD_V_RES) {
+            break;
+        }
+        uint16_t fg = COLOR_WHITE;
+        if (i == 0) {
+            fg = COLOR_BLACK;
+        } else if (i == 1) {
+            fg = COLOR_YELLOW;
+        }
+        badge_display_draw_string(s_panel, 4, y, lines[i], fg, COLOR_BRAND, SCHED_SCALE);
+        y += SCHED_LINE_H;
+    }
+}
+
+static int badge_name_scale_for_len(size_t len)
+{
+    if (len <= 10) {
+        return 3;
+    }
+    return 2;
+}
+
+static int split_name_words(const char *name, char words[][BADGE_NAME_MAX + 1], int max_words)
+{
+    int nwords = 0;
+    const char *p = name ? name : "";
+
+    while (*p && nwords < max_words) {
+        while (*p == ' ') {
+            p++;
+        }
+        if (!*p) {
+            break;
+        }
+        const char *start = p;
+        while (*p && *p != ' ') {
+            p++;
+        }
+        size_t len = (size_t)(p - start);
+        if (len >= sizeof(words[0])) {
+            len = sizeof(words[0]) - 1;
+        }
+        memcpy(words[nwords], start, len);
+        words[nwords][len] = '\0';
+        nwords++;
+    }
+
+    if (nwords == 0 && name && name[0]) {
+        strlcpy(words[0], name, sizeof(words[0]));
+        nwords = 1;
+    }
+    return nwords;
+}
+
+static void draw_badge_lines(void)
+{
+    const char *name = badge_name_get();
+    char words[4][BADGE_NAME_MAX + 1];
+    int nwords = split_name_words(name, words, 4);
+    if (nwords <= 0) {
+        badge_display_restore_bg(s_panel, TEXT_X, Y_TITLE, TEXT_W, BADGE_LCD_V_RES - Y_TITLE,
+                                 COLOR_NAVY);
+        return;
+    }
+
+    size_t max_len = 0;
+    for (int i = 0; i < nwords; i++) {
+        size_t len = utf8_char_count(words[i]);
+        if (len > max_len) {
+            max_len = len;
+        }
+    }
+    int scale = badge_name_scale_for_len(max_len);
+    int char_h = 8 * scale;
+    int gap = (scale >= 3) ? 6 : 4;
+    int block_h = nwords * char_h + (nwords - 1) * gap;
+    int y0 = (BADGE_LCD_V_RES - block_h) / 2;
+    if (y0 < 8) {
+        y0 = 8;
+    }
+
+    badge_display_restore_bg(s_panel, 0, 0, BADGE_LCD_H_RES, BADGE_LCD_V_RES, COLOR_NAVY);
+    for (int i = 0; i < nwords; i++) {
+        draw_centered_name(y0 + i * (char_h + gap), words[i], scale, COLOR_BLACK);
+    }
+}
+
+static void redraw_mode_content(void)
+{
+    badge_radio_mode_t mode = badge_radio_get_mode();
+    if (mode == BADGE_RADIO_MODE_BADGE) {
+        draw_badge_lines();
+        return;
+    }
+    if (mode == BADGE_RADIO_MODE_SCHEDULE) {
+        draw_schedule();
+        return;
+    }
+
+    badge_display_fill(s_panel, 0, 0, BADGE_LCD_H_RES, BADGE_LCD_V_RES, COLOR_NAVY);
+    badge_display_draw_string(s_panel, TEXT_X, Y_TITLE, "Scapycon 2026 V2X", COLOR_WHITE, COLOR_NAVY,
+                              TEXT_SCALE);
+    draw_sniffer_lines();
+}
+
+static void ui_capture_state(void)
+{
+    s_ui.mode = badge_radio_get_mode();
+    s_ui.rx_count = badge_radio_rx_count();
+    s_ui.channel_mhz = badge_radio_its_channel_mhz();
+}
+
+static void ui_init_panel(void)
+{
+    redraw_mode_content();
+    ui_capture_state();
+    s_ui_ready = true;
+}
+
+static void ui_update(void)
+{
+    if (!s_ui_ready) {
+        ui_init_panel();
+        return;
+    }
+
+    badge_radio_mode_t mode = badge_radio_get_mode();
+    if (mode != s_ui.mode) {
+        redraw_mode_content();
+        ui_capture_state();
+        s_sched_dirty = false;
+        return;
+    }
+
+    if (mode == BADGE_RADIO_MODE_BADGE) {
+        if (s_name_dirty) {
+            draw_badge_lines();
+            s_name_dirty = false;
+        }
+        return;
+    }
+
+    if (mode == BADGE_RADIO_MODE_SCHEDULE) {
+        if (s_sched_dirty) {
+            draw_schedule();
+            s_sched_dirty = false;
+        }
+        return;
+    }
+
+    if (mode == BADGE_RADIO_MODE_SNIFFER) {
+        uint32_t rx = badge_radio_rx_count();
+        int ch = badge_radio_its_channel_mhz();
+        if (rx != s_ui.rx_count || ch != s_ui.channel_mhz) {
+            draw_sniffer_lines();
+            s_ui.rx_count = rx;
+            s_ui.channel_mhz = ch;
+        }
+    }
+}
+
+static void log_status(void)
+{
+    if (badge_radio_get_mode() == BADGE_RADIO_MODE_BADGE) {
+        ESP_LOGI(TAG, "Badge mode — %s", badge_name_get());
+    } else if (badge_radio_get_mode() == BADGE_RADIO_MODE_SCHEDULE) {
+        ESP_LOGI(TAG, "Schedule — day %d", s_sched_day + 1);
+    } else if (badge_radio_get_mode() == BADGE_RADIO_MODE_SNIFFER) {
+        ESP_LOGI(TAG, "802.11p sniffer — packets: %lu", (unsigned long)badge_radio_rx_count());
+    }
+}
+
+static void ui_task(void *arg)
+{
+    (void)arg;
+
+    badge_display_init(&s_panel);
+
+    if (badge_display_is_ready()) {
+        badge_power_start_monitor();
+        ui_init_panel();
+
+        while (true) {
+            ui_update();
+            TickType_t delay = badge_radio_get_mode() == BADGE_RADIO_MODE_BADGE ? pdMS_TO_TICKS(500)
+                                                                                : pdMS_TO_TICKS(250);
+            vTaskDelay(delay);
+        }
+    }
+
+    ESP_LOGI(TAG, "headless UI (no display)");
+    while (true) {
+        log_status();
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
+}
+
+static void on_name_changed(void)
+{
+    s_name_dirty = true;
+}
+
+void badge_ui_toggle_schedule_day(void)
+{
+    s_sched_day ^= 1;
+    s_sched_dirty = true;
+}
+
+void badge_ui_start(void)
+{
+    badge_name_set_change_cb(on_name_changed);
+    xTaskCreate(ui_task, "ui", 4096, NULL, 4, NULL);
+}

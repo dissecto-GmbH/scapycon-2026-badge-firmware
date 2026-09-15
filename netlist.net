@@ -1,0 +1,3312 @@
+PROTEL NETLIST 2.0
+[
+DESIGNATOR
+U1
+FOOTPRINT
+COMM-SMD_ESP32-C5-WROOM-1-N4
+PARTTYPE
+ESP32-C5-WROOM-1-N8R8
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+ESP32-C5-WROOM-1-N8R8
+Designator
+U1
+Device
+ESP32-C5-WROOM-1-N8R8
+Unique ID
+gge1
+Name
+ESP32-C5-WROOM-1-N8R8
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+不带固件 2.4&5 GHz双频Wi-Fi6、Bluetooth5、Zigbee及Thread模组，内置RISC-V 32位单核处理器，外设丰富
+Supplier Part
+C51950749
+Manufacturer
+ESPRESSIF(乐鑫)
+Manufacturer Part
+ESP32-C5-WROOM-1-N8R8
+Supplier Footprint
+SMD,27.5x18mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/ESP32-C5-WROOM-1-N8R8/54676336.html
+Supplier
+LCSC
+Description
+
+
+*
+]
+[
+DESIGNATOR
+C1
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C1
+Device
+CL10A226MP8NUNE
+Unique ID
+gge4
+Name
+22uF
+Value
+22uF
+Supplier Footprint
+0603
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+
+*
+]
+[
+DESIGNATOR
+R2
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R2
+Symbol
+Res
+Device
+Res_0402
+Name
+10K
+Unique ID
+gge7
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+USB1
+FOOTPRINT
+USB-C-SMD_TYPE-C-16PIN-2MD-073
+PARTTYPE
+TYPE-C 16PIN 2MD(073)
+DESCRIPTION
+Connector Type:Type-C Protocol Standard:- Gender:Female Mounting Type:Surface Mount, Right Angle Number of Contacts:16P Number of Ports:1 Current Rating-Power:3A Voltage Rating:5V Connect-Disconnect Life:10,000 Cycles Supplementary Features:- Center Heigh
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TYPE-C 16PIN 2MD(073)
+Designator
+USB1
+Device
+TYPE-C 16PIN 2MD(073)
+Unique ID
+gge10
+Name
+TYPE-C 16PIN 2MD(073)
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+Type-C 母 卧贴
+Supplier Part
+C2765186
+Manufacturer
+SHOU HAN(首韩)
+Manufacturer Part
+TYPE-C 16PIN 2MD(073)
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/TYPE-C%252016PIN%25202MD(073)/2901843.html
+Supplier
+LCSC
+3D Model Title
+USB-C-SMD_TYPE-C-6PIN-2MD-073
+Connector Type
+Type-C
+Protocol Standard
+-
+Gender
+Female
+Mounting Type
+Surface Mount, Right Angle
+Number of Contacts
+16P
+Number of Ports
+1
+Current Rating-Power
+3A
+Voltage Rating
+5V
+Connect-Disconnect Life
+10,000 Cycles
+Supplementary Features
+-
+Center Height
+-
+Length
+-
+Detection color
+Black
+Operating Temperature
+-25℃~+85℃
+Description
+Connector Type:Type-C Protocol Standard:- Gender:Female Mounting Type:Surface Mount, Right Angle Number of Contacts:16P Number of Ports:1 Current Rating-Power:3A Voltage Rating:5V Connect-Disconnect Life:10,000 Cycles Supplementary Features:- Center Heigh
+
+*
+]
+[
+DESIGNATOR
+R5
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R5
+Symbol
+Res
+Device
+Res_0402
+Value
+5.1k
+Name
+5.1k
+Unique ID
+gge11
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R6
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R6
+Symbol
+Res
+Device
+Res_0402
+Value
+5.1k
+Name
+5.1k
+Unique ID
+gge12
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Description
+
+
+*
+]
+[
+DESIGNATOR
+C3
+FOOTPRINT
+C0402
+PARTTYPE
+CAP_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+C3
+Symbol
+CAP
+Device
+CAP_0402
+Unique ID
+gge26
+Supplier Part
+C1525
+Supplier Footprint
+0402
+3D Model Title
+C0402_L1.0-W0.5-H0.5
+Value
+100nF
+Name
+100nF
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+C2
+FOOTPRINT
+C0402
+PARTTYPE
+CAP_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+C2
+Symbol
+CAP
+Device
+CAP_0402
+Unique ID
+gge27
+Supplier Part
+C1525
+Supplier Footprint
+0402
+3D Model Title
+C0402_L1.0-W0.5-H0.5
+Value
+100nF
+Name
+100nF
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+SW_RESET
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_RESET
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+SW_BOOT
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_BOOT
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13_0
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+R19
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R19
+Symbol
+Res
+Device
+Res_0402
+Name
+10K
+Unique ID
+gge7_0
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R20
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R20
+Symbol
+Res
+Device
+Res_0402
+Name
+10K
+Unique ID
+gge7_1
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+U6
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U6
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge38
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+U7
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U7
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge39
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+R7
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R7
+Symbol
+Res
+Device
+Res_0402
+Unique ID
+gge9_0
+Name
+330
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Value
+330
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R25
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R25
+Symbol
+Res
+Device
+Res_0402
+Name
+10K
+Unique ID
+gge7_2
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R26
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R26
+Symbol
+Res
+Device
+Res_0402
+Name
+10K
+Unique ID
+gge7_3
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+C11
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C11
+Device
+CL10A226MP8NUNE
+Unique ID
+gge4_4
+Name
+22uF
+Value
+22uF
+Supplier Footprint
+0603
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+
+*
+]
+[
+DESIGNATOR
+U9
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U9
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge39_1
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+U10
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U10
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge39_2
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+U11
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U11
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge39_3
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+U12
+FOOTPRINT
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+PARTTYPE
+SK6805SIDE-G-003
+DESCRIPTION
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SK6805SIDE-G-003
+Designator
+U12
+Device
+SK6805SIDE-G-003
+Name
+SK6805SIDE-G-003
+Unique ID
+gge39_4
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+SK6805SIDE-G-003
+Supplier Part
+C31452139
+Manufacturer
+欧思科光电
+Manufacturer Part
+SK6805SIDE-G-003
+Supplier Footprint
+SMD,1.6x3.5mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/SK6805SIDE-G-003/33184482.html
+Supplier
+LCSC
+3D Model Title
+LED-SMD_4P-L3.5-W1.6_SK6805SIDE-G-001
+Wavelength
+520nm~530nm
+Luminous Intensity
+320mcd~580mcd
+Fixed-Frequency Pwm Mode
+4kHz
+Data Transmission Rate
+800Kbit/s
+Voltage - Supply
+3.7V~5.5V
+Quiescent Current
+0.25mA
+Lens Color
+Translucent Frosted Lens
+ESD Withstand Voltage
+2000V
+Operating Temperature
+-40℃~+85℃
+Viewing Angle
+120°
+Length
+3.5mm
+Width
+1.55mm
+Height
+1.25mm
+Description
+Wavelength:520nm~530nm Luminous Intensity:320mcd~580mcd Fixed-Frequency Pwm Mode:4kHz Data Transmission Rate:800Kbit/s Voltage - Supply:3.7V~5.5V Voltage - Supply:3.7V~5.5V Quiescent Current:0.25mA Lens Color:Translucent Frosted Lens ESD Withstand Voltage
+
+*
+]
+[
+DESIGNATOR
+H6
+FOOTPRINT
+HDR-SMD_8P-P2.54-H-M-W13.3-N-1
+PARTTYPE
+HX PZ2.54-1x8P WT
+DESCRIPTION
+Pin Structure:1x8P Pitch:2.54mm Row Spacing:- Circluar Pins/Square Pins:Pin Header Mounting Type:Surface Mount, Right Angle Number of Rows:1 Number of Pins:8P Current Rating:3A Voltage Rating (Max):1kV Length of Mating Pin:6mm Insulation Height:2.5mm Leng
+Component Kind
+Standard
+Add into BOM
+no
+Convert to PCB
+yes
+Symbol
+HX PZ2.54-1X8P WT
+Designator
+H6
+Device
+HX PZ2.54-1x8P WT
+Name
+HX PZ2.54-1x8P WT
+Unique ID
+gge42
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+配套排母：HX PM2.54-1x8P系列 1x8P 间距:2.54mm 方针 卧贴
+Supplier Part
+C46061681
+Manufacturer
+hanxia(韩下)
+Manufacturer Part
+HX PZ2.54-1x8P WT
+Supplier Footprint
+SMD,P=2.54mm,卧贴
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/HX%2520PZ2.54-1x8P%2520WT/48170541.html
+Supplier
+LCSC
+3D Model Title
+HDR-SMD_8P-P2.54-H-M-W13.3-N-1
+Pin Structure
+1x8P
+Pitch
+2.54mm
+Row Spacing
+-
+Circluar Pins/Square Pins
+Pin Header
+Mounting Type
+Surface Mount, Right Angle
+Number of Rows
+1
+Number of Pins
+8P
+Current Rating
+3A
+Voltage Rating (Max)
+1kV
+Length of Mating Pin
+6mm
+Insulation Height
+2.5mm
+Length of End Connection Pin
+-
+Contact Material
+Brass
+Contact Plating
+Gold
+Operating Temperature
+-40℃~+105℃
+Color
+Black
+Supplementary Features
+-
+Description
+Pin Structure:1x8P Pitch:2.54mm Row Spacing:- Circluar Pins/Square Pins:Pin Header Mounting Type:Surface Mount, Right Angle Number of Rows:1 Number of Pins:8P Current Rating:3A Voltage Rating (Max):1kV Length of Mating Pin:6mm Insulation Height:2.5mm Leng
+
+*
+]
+[
+DESIGNATOR
+H7
+FOOTPRINT
+HDR-SMD_10P-P2.54-H-M-W13.3-N
+PARTTYPE
+HX PZ2.54-1x10P WT
+DESCRIPTION
+Pin Structure:1x10P Pitch:2.54mm Row Spacing:- Circluar Pins/Square Pins:Pin Header Mounting Type:Surface Mount, Right Angle Number of Rows:1 Number of Pins:10P Current Rating:3A Voltage Rating (Max):1kV Length of Mating Pin:6mm Insulation Height:2.5mm Le
+Component Kind
+Standard
+Add into BOM
+no
+Convert to PCB
+yes
+Symbol
+HX PZ2.54-1X10P WT
+Designator
+H7
+Device
+HX PZ2.54-1x10P WT
+Name
+HX PZ2.54-1x10P WT
+Unique ID
+gge43
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+配套排母：HX PM2.54-1x10P系列 1x10P 间距:2.54mm 方针 卧贴
+Supplier Part
+C46061683
+Manufacturer
+hanxia(韩下)
+Manufacturer Part
+HX PZ2.54-1x10P WT
+Supplier Footprint
+SMD,P=2.54mm,卧贴
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/HX%2520PZ2.54-1x10P%2520WT/48170543.html
+Supplier
+LCSC
+3D Model Title
+HDR-SMD_10P-P2.54-H-M-W13.3-N
+Pin Structure
+1x10P
+Pitch
+2.54mm
+Row Spacing
+-
+Circluar Pins/Square Pins
+Pin Header
+Mounting Type
+Surface Mount, Right Angle
+Number of Rows
+1
+Number of Pins
+10P
+Current Rating
+3A
+Voltage Rating (Max)
+1kV
+Length of Mating Pin
+6mm
+Insulation Height
+2.5mm
+Length of End Connection Pin
+-
+Contact Material
+Brass
+Contact Plating
+Gold
+Operating Temperature
+-40℃~+105℃
+Color
+Black
+Supplementary Features
+-
+Description
+Pin Structure:1x10P Pitch:2.54mm Row Spacing:- Circluar Pins/Square Pins:Pin Header Mounting Type:Surface Mount, Right Angle Number of Rows:1 Number of Pins:10P Current Rating:3A Voltage Rating (Max):1kV Length of Mating Pin:6mm Insulation Height:2.5mm Le
+
+*
+]
+[
+DESIGNATOR
+SW_D
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_D
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13_1
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+SW_C
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_C
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13_2
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+SW_B
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_B
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13_3
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+SW_A
+FOOTPRINT
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+PARTTYPE
+TS-1187A-B-A-B
+DESCRIPTION
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+TS-1187A-B-A-B
+Designator
+SW_A
+Device
+TS-1187A-B-A-B
+Unique ID
+gge13_4
+Name
+TS-1187A-B-A-B
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+5.1*5.1*1.5mm 立贴 轻触开关
+Supplier Part
+C318884
+Manufacturer
+XKB Connection(中国星坤)
+Manufacturer Part
+TS-1187A-B-A-B
+Supplier Footprint
+SMD
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/TS-1187A-B-A-B/299976.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+Circuit
+SPST
+Actuator Style
+Round Button
+Operating Force
+1.6N
+Mounting Type
+Surface Mount,Vertical
+Length
+5.1mm
+Width
+5.1mm
+Switch Height
+1.5mm
+with Bracket
+Without Bracket
+Contact Current
+50mA
+Voltage Rating
+12V
+Actuator/Cap Color
+Gold
+With Lamp
+No
+Life
+100,000 Cycles
+Operating Temperature
+-30℃~+85℃
+Description
+Circuit:SPST Actuator Style:Round Button Operating Force:1.6N Mounting Type:Surface Mount,Vertical Length:5.1mm Width:5.1mm Switch Height:1.5mm with Bracket:Without Bracket Contact Current:50mA Voltage Rating:12V Actuator/Cap Color:Gold With Lamp:No Life:
+
+*
+]
+[
+DESIGNATOR
+R3
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R3
+Symbol
+Res
+Device
+Res_0402
+Name
+100K
+Unique ID
+gge7_4
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+100K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R4
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R4
+Symbol
+Res
+Device
+Res_0402
+Name
+100K
+Unique ID
+gge7_5
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+100K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R8
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R8
+Symbol
+Res
+Device
+Res_0402
+Name
+1M
+Unique ID
+gge7_6
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+1M
+Description
+
+
+*
+]
+[
+DESIGNATOR
+C13
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C13
+Device
+CL10A226MP8NUNE
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+Supplier Footprint
+0603
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Value
+22uF
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+Name
+22uF
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Unique ID
+gge4_5
+
+*
+]
+[
+DESIGNATOR
+C14
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C14
+Device
+CL10A226MP8NUNE
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+Supplier Footprint
+0603
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Value
+22uF
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+Name
+22uF
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Unique ID
+gge4_6
+
+*
+]
+[
+DESIGNATOR
+U2
+FOOTPRINT
+SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BL
+PARTTYPE
+RT9013-33GB
+DESCRIPTION
+Output Configuration:Positive Voltage - Supply:5.5V Output Voltage:3.3V Output Voltage:3.3V Output Current:500mA Power Supply Rejection Ratio (PSRR):50dB@(10kHz) Voltage Dropout:400mV@(500mA) standby current:25uA Noise:30uVrms Features:Enable control；Shor
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+RT9013-33GB
+Designator
+U2
+Device
+RT9013-33GB
+Unique ID
+gge2
+Name
+RT9013-33GB
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+3.3V 500mA 5.5V
+Supplier Part
+C47773
+Manufacturer
+RICHTEK(立锜)
+Manufacturer Part
+RT9013-33GB
+Supplier Footprint
+SOT-23-5
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/RT9013-33GB/48778.html
+Supplier
+LCSC
+3D Model Title
+SOT-23-5_L2.9-W1.6-H1.1-LS2.8-P0.95
+Output Configuration
+Positive
+Voltage - Supply
+5.5V
+Output Voltage
+3.3V
+Output Current
+500mA
+Power Supply Rejection Ratio (PSRR)
+50dB@(10kHz)
+Voltage Dropout
+400mV@(500mA)
+standby current
+25uA
+Noise
+30uVrms
+Features
+Enable control；Short Circuit Protection；Over Current Protection；Thermal shutdown
+Operating Temperature
+-40℃~+125℃@(Tj)
+Output Type
+Fixed
+Number of Outputs
+1
+Description
+Output Configuration:Positive Voltage - Supply:5.5V Output Voltage:3.3V Output Voltage:3.3V Output Current:500mA Power Supply Rejection Ratio (PSRR):50dB@(10kHz) Voltage Dropout:400mV@(500mA) standby current:25uA Noise:30uVrms Features:Enable control；Shor
+
+*
+]
+[
+DESIGNATOR
+R1
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R1
+Symbol
+Res
+Device
+Res_0402
+Unique ID
+gge3
+Name
+10K
+Reuse Block
+
+Group ID
+
+Channel ID
+
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+10K
+Description
+
+
+*
+]
+[
+DESIGNATOR
+R9
+FOOTPRINT
+R0402
+PARTTYPE
+Res_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R9
+Symbol
+Res
+Device
+Res_0402
+Unique ID
+gge33
+Supplier Footprint
+0402
+3D Model Title
+R0402_L1.0-W0.5-H0.4
+Value
+100k
+Name
+100k
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+C4
+FOOTPRINT
+C0402
+PARTTYPE
+CAP_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+C4
+Symbol
+CAP
+Device
+CAP_0402
+Unique ID
+gge28
+Supplier Part
+C1525
+Supplier Footprint
+0402
+3D Model Title
+C0402_L1.0-W0.5-H0.5
+Value
+100nF
+Name
+100nF
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+C7
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C7
+Device
+CL10A226MP8NUNE
+Unique ID
+gge4_0
+Name
+22uF
+Value
+22uF
+Supplier Footprint
+0603
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+
+*
+]
+[
+DESIGNATOR
+C8
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C8
+Device
+CL10A226MP8NUNE
+Unique ID
+gge4_1
+Name
+22uF
+Value
+22uF
+Supplier Footprint
+0603
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+
+*
+]
+[
+DESIGNATOR
+C10
+FOOTPRINT
+C0603
+PARTTYPE
+CL10A226MP8NUNE
+DESCRIPTION
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+CL10A226MP8NUNE
+Designator
+C10
+Device
+CL10A226MP8NUNE
+Unique ID
+gge4_3
+Name
+22uF
+Value
+22uF
+Supplier Footprint
+0603
+3D Model Title
+C0603_L1.6-W0.8-H0.8
+Description
+Capacitance:22uF Tolerance:±20% Tolerance:±20% Voltage Rating:10V Temperature Coefficient:X5R 
+LCSC Part Name
+22uF ±20% 10V
+Supplier Part
+C86295
+Manufacturer
+SAMSUNG(三星)
+Manufacturer Part
+CL10A226MP8NUNE
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/CL10A226MP8NUNE/87471.html
+Supplier
+LCSC
+Tolerance
+±20%
+Voltage Rating
+10V
+Temperature Coefficient
+X5R
+
+*
+]
+[
+DESIGNATOR
+D1
+FOOTPRINT
+SMA_L4.2-W2.6-LS5.0-RD_1
+PARTTYPE
+SS14_C2480
+DESCRIPTION
+Diode Configuration:Independent Voltage - Forward(Vf@If):550mV@1A Voltage - DC Reverse(Vr):40V Current - Rectified:1A Reverse Leakage Current (Ir):300uA@40V Operating Junction Temperature Range:-55℃~+150℃ Operating Junction Temperature Range:-55℃~+150℃ No
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+SS14
+Designator
+D1
+Device
+SS14_C2480
+Unique ID
+gge34
+Name
+SS14
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+电压:40V 电流:1A
+Supplier Part
+C2480
+Manufacturer
+MDD(辰达半导体)
+Manufacturer Part
+SS14
+Supplier Footprint
+SMA(DO-214AC)
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/SS14/2857.html
+Supplier
+LCSC
+3D Model Title
+SMA_L4.2-W2.6-LS5.0-RD_1
+Diode Configuration
+Independent
+Voltage - Forward(Vf@If)
+550mV@1A
+Voltage - DC Reverse(Vr)
+40V
+Current - Rectified
+1A
+Reverse Leakage Current (Ir)
+300uA@40V
+Operating Junction Temperature Range
+-55℃~+150℃
+Non-Repetitive Peak Forward Surge Current
+25A
+Description
+Diode Configuration:Independent Voltage - Forward(Vf@If):550mV@1A Voltage - DC Reverse(Vr):40V Current - Rectified:1A Reverse Leakage Current (Ir):300uA@40V Operating Junction Temperature Range:-55℃~+150℃ Operating Junction Temperature Range:-55℃~+150℃ No
+
+*
+]
+[
+DESIGNATOR
+Q3
+FOOTPRINT
+SOT-23_L2.9-W1.3-P1.90-LS2.4-BR
+PARTTYPE
+AO3401A_C15127
+DESCRIPTION
+Number:1 P-Channel Drain to Source Voltage:30V Current - Continuous Drain(Id):4A RDS(on):47mΩ@10V；85mΩ@2.5V；60mΩ@4.5V Pd - Power Dissipation:- Gate Threshold Voltage (Vgs(th)):900mV Gate Charge(Qg):14nC@10V Input Capacitance(Ciss):645pF Reverse Transfer C
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+AO3401A
+Designator
+Q3
+Device
+AO3401A_C15127
+Name
+AO3401A
+Unique ID
+gge35
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+1个P沟道 耐压:30V 电流:4A
+Supplier Part
+C15127
+Manufacturer
+AOS
+Manufacturer Part
+AO3401A
+Supplier Footprint
+SOT-23
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/AO3401A/15801.html
+Supplier
+LCSC
+3D Model Title
+SOT-23-3P_L2.9-W1.3-H1.0-LS2.4-P0.95
+Number
+1 P-Channel
+Drain to Source Voltage
+30V
+Current - Continuous Drain(Id)
+4A
+RDS(on)
+47mΩ@10V；85mΩ@2.5V；60mΩ@4.5V
+Pd - Power Dissipation
+-
+Gate Threshold Voltage (Vgs(th))
+900mV
+Gate Charge(Qg)
+14nC@10V
+Input Capacitance(Ciss)
+645pF
+Reverse Transfer Capacitance (Crss@Vds)
+55pF
+Operating Temperature
+-
+Type
+-
+Output Capacitance(Coss)
+80pF
+Description
+Number:1 P-Channel Drain to Source Voltage:30V Current - Continuous Drain(Id):4A RDS(on):47mΩ@10V；85mΩ@2.5V；60mΩ@4.5V Pd - Power Dissipation:- Gate Threshold Voltage (Vgs(th)):900mV Gate Charge(Qg):14nC@10V Input Capacitance(Ciss):645pF Reverse Transfer C
+
+*
+]
+[
+DESIGNATOR
+U3
+FOOTPRINT
+BAT-TH_BH-AAA-A1AJ024
+PARTTYPE
+BH-AAA-A1AJ024
+DESCRIPTION
+Type:Battery holder Operating Temperature:-10~100℃ Contact coating:Nickel plated Applicable battery specifications:No. 7 
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+BH-AAA-A1AJ024
+Designator
+U3
+Device
+BH-AAA-A1AJ024
+Name
+BH-AAA-A1AJ024
+Unique ID
+gge45
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+MYOUNG(美阳)电池盒BH-AAA-3J 新 单边两PIN直插 适配7号电池
+Supplier Part
+C5290193
+Manufacturer
+MYOUNG(美阳)
+Manufacturer Part
+BH-AAA-A1AJ024
+Supplier Footprint
+-
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/BH-AAA-A1AJ024/6030899.html
+Supplier
+LCSC
+Type
+Battery holder
+Operating Temperature
+-10~100℃
+Contact coating
+Nickel plated
+Applicable battery specifications
+No. 7
+Description
+Type:Battery holder Operating Temperature:-10~100℃ Contact coating:Nickel plated Applicable battery specifications:No. 7 
+
+*
+]
+[
+DESIGNATOR
+SW7
+FOOTPRINT
+SW-SMD_MS-22D28-G020
+PARTTYPE
+MS-22D28-G020
+DESCRIPTION
+Circuit:DPDT Actuator Style:Rectangular Columnar Termination Style:Gull Wing Length:7.1mm Width:4mm Switch Height:4.15mm Mounting Type:Surface Mount,Vertical Actuator Color:Black Current Rating:1A Voltage Rating:6V Life:10,000 cycles Operating Temperature
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+MS-22D28-G020
+Designator
+SW7
+Device
+MS-22D28-G020
+Unique ID
+gge46
+Name
+MS-22D28-G020
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+微型拨动开关
+Supplier Part
+C963205
+Manufacturer
+G-Switch(品赞)
+Manufacturer Part
+MS-22D28-G020
+Supplier Footprint
+SMD,7.1x4mm
+JLCPCB Part Class
+Extended Part
+Datasheet
+https://item.szlcsc.com/datasheet/MS-22D28-G020/1046840.html
+Supplier
+LCSC
+3D Model Title
+SW-SMD_MS-22D28-G020
+Circuit
+DPDT
+Actuator Style
+Rectangular Columnar
+Termination Style
+Gull Wing
+Length
+7.1mm
+Width
+4mm
+Switch Height
+4.15mm
+Mounting Type
+Surface Mount,Vertical
+Actuator Color
+Black
+Current Rating
+1A
+Voltage Rating
+6V
+Life
+10,000 cycles
+Operating Temperature
+-20℃~+70℃
+Description
+Circuit:DPDT Actuator Style:Rectangular Columnar Termination Style:Gull Wing Length:7.1mm Width:4mm Switch Height:4.15mm Mounting Type:Surface Mount,Vertical Actuator Color:Black Current Rating:1A Voltage Rating:6V Life:10,000 cycles Operating Temperature
+
+*
+]
+[
+DESIGNATOR
+C5
+FOOTPRINT
+C0402
+PARTTYPE
+CAP_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+C5
+Symbol
+CAP
+Device
+CAP_0402
+Unique ID
+gge29
+Supplier Part
+C1525
+Supplier Footprint
+0402
+3D Model Title
+C0402_L1.0-W0.5-H0.5
+Value
+100nF
+Name
+100nF
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+Q2
+FOOTPRINT
+SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR
+PARTTYPE
+AO3400A_C20917
+DESCRIPTION
+Number:- Drain to Source Voltage:30V Current - Continuous Drain(Id):- RDS(on):48mΩ@2.5V Pd - Power Dissipation:- Gate Threshold Voltage (Vgs(th)):1.45V@250uA Gate Charge(Qg):7nC@10V Input Capacitance(Ciss):630pF@15V Reverse Transfer Capacitance (Crss@Vds)
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+AO3400A
+Designator
+Q2
+Device
+AO3400A_C20917
+Name
+AO3400A
+Unique ID
+gge17
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+1个N沟道 耐压:30V 电流:5.7A
+Supplier Part
+C20917
+Manufacturer
+AOS
+Manufacturer Part
+AO3400A
+Supplier Footprint
+SOT-23-3L
+JLCPCB Part Class
+Basic Part
+Datasheet
+https://item.szlcsc.com/datasheet/AO3400A/21629.html
+Supplier
+LCSC
+3D Model Title
+SOT-23-3P_L2.9-W1.3-H1.0-LS2.4-P0.95
+Number
+-
+Drain to Source Voltage
+30V
+Current - Continuous Drain(Id)
+-
+RDS(on)
+48mΩ@2.5V
+Pd - Power Dissipation
+-
+Gate Threshold Voltage (Vgs(th))
+1.45V@250uA
+Gate Charge(Qg)
+7nC@10V
+Input Capacitance(Ciss)
+630pF@15V
+Reverse Transfer Capacitance (Crss@Vds)
+-
+Operating Temperature
+-55℃~+150℃@(Tj)
+Configuration
+-
+Type
+N-Channel
+Output Capacitance(Coss)
+-
+Description
+Number:- Drain to Source Voltage:30V Current - Continuous Drain(Id):- RDS(on):48mΩ@2.5V Pd - Power Dissipation:- Gate Threshold Voltage (Vgs(th)):1.45V@250uA Gate Charge(Qg):7nC@10V Input Capacitance(Ciss):630pF@15V Reverse Transfer Capacitance (Crss@Vds)
+
+*
+]
+[
+DESIGNATOR
+R12
+FOOTPRINT
+R0805
+PARTTYPE
+Res_0805
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+R12
+Symbol
+Res
+Device
+Res_0805
+Unique ID
+gge16
+Supplier Footprint
+0805
+Value
+10R
+3D Model Title
+R0805_L2.0-W1.3-H0.6
+Name
+10R
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+[
+DESIGNATOR
+FPC2
+FOOTPRINT
+FPC-SMD_12P-P0.50_XUNPU_FPC-05FB-12PH20
+PARTTYPE
+FPC-05FB-12PH20
+DESCRIPTION
+Locking Feature:Hinged Lid Contact Type:Surface Mount Number of Contacts:12P Pitch:0.5mm Mounting Type:双侧触点/上下接 FFC, FCB Thickness:0.3mm FFC, FCB Thickness:0.3mm Height Above Board:2mm Contact Material:Phosphor Bronze Contact Plating:Tin Operating Tempera
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Symbol
+FPC-05FB-12PH20
+Designator
+FPC2
+Supplier
+LCSC
+Supplier Part
+C2856829
+Manufacturer
+XUNPU(讯普)
+Manufacturer Part
+FPC-05FB-12PH20
+JLCPCB Part Class
+Extended Part
+Device
+FPC-05FB-12PH20
+Unique ID
+gge25
+Name
+FPC-05FB-12PH20
+Reuse Block
+
+Group ID
+
+Channel ID
+
+LCSC Part Name
+翻盖式 卧贴 P数:12P 间距:0.5mm
+Supplier Footprint
+SMD,P=0.5mm,卧贴
+Datasheet
+https://item.szlcsc.com/datasheet/FPC-05FB-12PH20/3056927.html
+3D Model Title
+FPC-SMD_12P-P0.50_XUNPU_FPC-05FB-12PH20
+Locking Feature
+Hinged Lid
+Contact Type
+Surface Mount
+Number of Contacts
+12P
+Pitch
+0.5mm
+Mounting Type
+双侧触点/上下接
+FFC, FCB Thickness
+0.3mm
+Height Above Board
+2mm
+Contact Material
+Phosphor Bronze
+Contact Plating
+Tin
+Operating Temperature
+-25℃~+85℃
+Rated Voltage (Max)
+50V
+Current Rating (Max)
+500mA
+Description
+Locking Feature:Hinged Lid Contact Type:Surface Mount Number of Contacts:12P Pitch:0.5mm Mounting Type:双侧触点/上下接 FFC, FCB Thickness:0.3mm FFC, FCB Thickness:0.3mm Height Above Board:2mm Contact Material:Phosphor Bronze Contact Plating:Tin Operating Tempera
+
+*
+]
+[
+DESIGNATOR
+C12
+FOOTPRINT
+C0402
+PARTTYPE
+CAP_0402
+DESCRIPTION
+
+Component Kind
+Standard
+Add into BOM
+yes
+Convert to PCB
+yes
+Designator
+C12
+Symbol
+CAP
+Device
+CAP_0402
+Unique ID
+gge27_0
+Supplier Part
+C1525
+Supplier Footprint
+0402
+3D Model Title
+C0402_L1.0-W0.5-H0.5
+Value
+100nF
+Name
+100nF
+Description
+
+Reuse Block
+
+Group ID
+
+Channel ID
+
+
+*
+]
+(
+IO15 
+U1-19 ESP32-C5-WROOM-1-N8R8-NC/IO15 Passive 
+)
+(
++3.3V 
+U1-2 ESP32-C5-WROOM-1-N8R8-3V3 Passive 
+C1-2 CL10A226MP8NUNE-2 Passive 
+R2-2 Res_0402-2 Input   
+C2-1 CAP_0402-1 Input   
+R19-2 Res_0402-2 Input   
+R20-2 Res_0402-2 Input   
+R25-2 Res_0402-2 Input   
+R26-2 Res_0402-2 Input   
+H7-10 HX PZ2.54-1x10P WT-10 Passive 
+C13-2 CL10A226MP8NUNE-2 Passive 
+C14-2 CL10A226MP8NUNE-2 Passive 
+U2-5 RT9013-33GB-VOUT Passive 
+C4-1 CAP_0402-1 Input   
+C7-2 CL10A226MP8NUNE-2 Passive 
+FPC2-10 FPC-05FB-12PH20-10 Input   
+FPC2-9 FPC-05FB-12PH20-9 Input   
+FPC2-8 FPC-05FB-12PH20-8 Input   
+C12-1 CAP_0402-1 Input   
+)
+(
+EN 
+U1-3 ESP32-C5-WROOM-1-N8R8-EN Passive 
+R2-1 Res_0402-1 Input   
+C3-1 CAP_0402-1 Input   
+SW_RESET-1 TS-1187A-B-A-B-A Passive 
+H6-2 HX PZ2.54-1x8P WT-2 Passive 
+)
+(
+FLIPPER_TX 
+U1-24 ESP32-C5-WROOM-1-N8R8-RX0 Passive 
+H7-6 HX PZ2.54-1x10P WT-6 Passive 
+)
+(
+FLIPPER_RX 
+U1-25 ESP32-C5-WROOM-1-N8R8-TX0 Passive 
+H7-5 HX PZ2.54-1x10P WT-5 Passive 
+)
+(
+GND 
+U1-29 ESP32-C5-WROOM-1-N8R8-GND Passive 
+U1-28 ESP32-C5-WROOM-1-N8R8-GND Passive 
+U1-1 ESP32-C5-WROOM-1-N8R8-GND Passive 
+C1-1 CL10A226MP8NUNE-1 Passive 
+USB1-A1B12 TYPE-C 16PIN 2MD(073)-GND Passive 
+USB1-B1A12 TYPE-C 16PIN 2MD(073)-GND Passive 
+USB1-14 TYPE-C 16PIN 2MD(073)-EH Passive 
+USB1-13 TYPE-C 16PIN 2MD(073)-EH Passive 
+R5-1 Res_0402-1 Input   
+R6-1 Res_0402-1 Input   
+C3-2 CAP_0402-2 Input   
+C2-2 CAP_0402-2 Input   
+SW_RESET-4 TS-1187A-B-A-B-D Passive 
+SW_RESET-3 TS-1187A-B-A-B-C Passive 
+SW_BOOT-4 TS-1187A-B-A-B-D Passive 
+SW_BOOT-3 TS-1187A-B-A-B-C Passive 
+U6-2 SK6805SIDE-G-003-GND Passive 
+U7-2 SK6805SIDE-G-003-GND Passive 
+C11-1 CL10A226MP8NUNE-1 Passive 
+U9-2 SK6805SIDE-G-003-GND Passive 
+U10-2 SK6805SIDE-G-003-GND Passive 
+U11-2 SK6805SIDE-G-003-GND Passive 
+U12-2 SK6805SIDE-G-003-GND Passive 
+H6-1 HX PZ2.54-1x8P WT-1 Passive 
+H7-1 HX PZ2.54-1x10P WT-1 Passive 
+H7-8 HX PZ2.54-1x10P WT-8 Passive 
+SW_D-4 TS-1187A-B-A-B-D Passive 
+SW_D-3 TS-1187A-B-A-B-C Passive 
+SW_C-4 TS-1187A-B-A-B-D Passive 
+SW_C-3 TS-1187A-B-A-B-C Passive 
+SW_B-4 TS-1187A-B-A-B-D Passive 
+SW_B-3 TS-1187A-B-A-B-C Passive 
+SW_A-4 TS-1187A-B-A-B-D Passive 
+SW_A-3 TS-1187A-B-A-B-C Passive 
+R4-1 Res_0402-1 Input   
+C13-1 CL10A226MP8NUNE-1 Passive 
+C14-1 CL10A226MP8NUNE-1 Passive 
+U2-2 RT9013-33GB-GND Passive 
+R9-1 Res_0402-1 Input   
+C4-2 CAP_0402-2 Input   
+C7-1 CL10A226MP8NUNE-1 Passive 
+C8-1 CL10A226MP8NUNE-1 Passive 
+C10-1 CL10A226MP8NUNE-1 Passive 
+U3-1 BH-AAA-A1AJ024-- Passive 
+C5-2 CAP_0402-2 Input   
+Q2-2 AO3400A_C20917-S Passive 
+FPC2-14 FPC-05FB-12PH20-14 Input   
+FPC2-13 FPC-05FB-12PH20-13 Input   
+FPC2-12 FPC-05FB-12PH20-12 Input   
+FPC2-1 FPC-05FB-12PH20-1 Input   
+C12-2 CAP_0402-2 Input   
+)
+(
+BOOT 
+U1-15 ESP32-C5-WROOM-1-N8R8-IO28 Passive 
+SW_BOOT-2 TS-1187A-B-A-B-B Passive 
+R19-1 Res_0402-1 Input   
+H6-3 HX PZ2.54-1x8P WT-3 Passive 
+H7-2 HX PZ2.54-1x10P WT-2 Passive 
+)
+(
+FLIPPER_SCK 
+U1-18 ESP32-C5-WROOM-1-N8R8-IO27 Passive 
+H6-4 HX PZ2.54-1x8P WT-4 Passive 
+SW_A-2 TS-1187A-B-A-B-B Passive 
+)
+(
+FLIPPER_MOSI 
+U1-27 ESP32-C5-WROOM-1-N8R8-IO26 Passive 
+H6-7 HX PZ2.54-1x8P WT-7 Passive 
+SW_B-2 TS-1187A-B-A-B-B Passive 
+)
+(
+FLIPPER_CS 
+U1-26 ESP32-C5-WROOM-1-N8R8-IO25 Passive 
+H6-5 HX PZ2.54-1x8P WT-5 Passive 
+)
+(
+FLIPPER_PA14 
+U1-23 ESP32-C5-WROOM-1-N8R8-IO24 Passive 
+H7-9 HX PZ2.54-1x10P WT-9 Passive 
+SW_C-2 TS-1187A-B-A-B-B Passive 
+)
+(
+FLIPPER_PA13 
+U1-21 ESP32-C5-WROOM-1-N8R8-IO23 Passive 
+H7-7 HX PZ2.54-1x10P WT-7 Passive 
+SW_D-2 TS-1187A-B-A-B-B Passive 
+)
+(
+IO14 
+U1-14 ESP32-C5-WROOM-1-N8R8-IO14 Passive 
+USB1-A6 TYPE-C 16PIN 2MD(073)-Dp1 Passive 
+USB1-B6 TYPE-C 16PIN 2MD(073)-Dp2 Passive 
+)
+(
+IO13 
+U1-13 ESP32-C5-WROOM-1-N8R8-IO13 Passive 
+USB1-B7 TYPE-C 16PIN 2MD(073)-Dn2 Passive 
+USB1-A7 TYPE-C 16PIN 2MD(073)-Dn1 Passive 
+)
+(
+IO10 
+U1-12 ESP32-C5-WROOM-1-N8R8-IO10 Passive 
+R7-1 Res_0402-1 Input   
+)
+(
+IO9 
+U1-11 ESP32-C5-WROOM-1-N8R8-IO9 Passive 
+FPC2-2 FPC-05FB-12PH20-2 Input   
+)
+(
+IO8 
+U1-10 ESP32-C5-WROOM-1-N8R8-IO8 Passive 
+FPC2-3 FPC-05FB-12PH20-3 Input   
+)
+(
+FLIPPER_MISO 
+U1-9 ESP32-C5-WROOM-1-N8R8-IO7 Passive 
+R20-1 Res_0402-1 Input   
+H6-6 HX PZ2.54-1x8P WT-6 Passive 
+)
+(
+IO6 
+U1-8 ESP32-C5-WROOM-1-N8R8-IO6 Passive 
+FPC2-4 FPC-05FB-12PH20-4 Input   
+)
+(
+FLIPPER_SCL 
+U1-16 ESP32-C5-WROOM-1-N8R8-IO5 Passive 
+R26-1 Res_0402-1 Input   
+H7-3 HX PZ2.54-1x10P WT-3 Passive 
+)
+(
+FLIPPER_SDA 
+U1-17 ESP32-C5-WROOM-1-N8R8-IO4 Passive 
+R25-1 Res_0402-1 Input   
+H7-4 HX PZ2.54-1x10P WT-4 Passive 
+)
+(
+IO3 
+U1-5 ESP32-C5-WROOM-1-N8R8-IO3 Passive 
+Q2-1 AO3400A_C20917-G Passive 
+)
+(
+IO2 
+U1-4 ESP32-C5-WROOM-1-N8R8-IO2 Passive 
+R8-2 Res_0402-2 Input   
+)
+(
+IO1 
+U1-7 ESP32-C5-WROOM-1-N8R8-IO1 Passive 
+FPC2-5 FPC-05FB-12PH20-5 Input   
+)
+(
+IO0 
+U1-6 ESP32-C5-WROOM-1-N8R8-IO0 Passive 
+FPC2-6 FPC-05FB-12PH20-6 Input   
+)
+(
+VBUS 
+USB1-A4B9 TYPE-C 16PIN 2MD(073)-VBUS Passive 
+USB1-B4A9 TYPE-C 16PIN 2MD(073)-VBUS Passive 
+R3-2 Res_0402-2 Input   
+R9-2 Res_0402-2 Input   
+D1-2 SS14_C2480-A Passive 
+Q3-1 AO3401A_C15127-G Passive 
+)
+(
+$1N52 
+USB1-A5 TYPE-C 16PIN 2MD(073)-CC1 Passive 
+R6-2 Res_0402-2 Input   
+)
+(
+$1N51 
+USB1-B5 TYPE-C 16PIN 2MD(073)-CC2 Passive 
+R5-2 Res_0402-2 Input   
+)
+(
+$1N191 
+U6-1 SK6805SIDE-G-003-DOUT Passive 
+U7-4 SK6805SIDE-G-003-DIN Passive 
+)
+(
+VIN 
+U6-3 SK6805SIDE-G-003-VDD Passive 
+U7-3 SK6805SIDE-G-003-VDD Passive 
+C11-2 CL10A226MP8NUNE-2 Passive 
+U9-3 SK6805SIDE-G-003-VDD Passive 
+U10-3 SK6805SIDE-G-003-VDD Passive 
+U11-3 SK6805SIDE-G-003-VDD Passive 
+U12-3 SK6805SIDE-G-003-VDD Passive 
+U2-1 RT9013-33GB-VIN Passive 
+R1-2 Res_0402-2 Input   
+C8-2 CL10A226MP8NUNE-2 Passive 
+D1-1 SS14_C2480-K Passive 
+Q3-2 AO3401A_C15127-S Passive 
+)
+(
+$1N190 
+U6-4 SK6805SIDE-G-003-DIN Passive 
+R7-2 Res_0402-2 Input   
+)
+(
+$1N192 
+U7-1 SK6805SIDE-G-003-DOUT Passive 
+U9-4 SK6805SIDE-G-003-DIN Passive 
+)
+(
+$1N283 
+U9-1 SK6805SIDE-G-003-DOUT Passive 
+U10-4 SK6805SIDE-G-003-DIN Passive 
+)
+(
+$1N286 
+U10-1 SK6805SIDE-G-003-DOUT Passive 
+U11-4 SK6805SIDE-G-003-DIN Passive 
+)
+(
+$1N289 
+U11-1 SK6805SIDE-G-003-DOUT Passive 
+U12-4 SK6805SIDE-G-003-DIN Passive 
+)
+(
+FLIPPER_5V 
+H6-8 HX PZ2.54-1x8P WT-8 Passive 
+)
+(
+$1N311 
+R3-1 Res_0402-1 Input   
+R4-2 Res_0402-2 Input   
+R8-1 Res_0402-1 Input   
+)
+(
+$2N25 
+U2-3 RT9013-33GB-EN Passive 
+R1-1 Res_0402-1 Input   
+)
+(
+BAT 
+C10-2 CL10A226MP8NUNE-2 Passive 
+U3-2 BH-AAA-A1AJ024-+ Passive 
+SW7-2 MS-22D28-G020-2 Passive 
+SW7-3 MS-22D28-G020-3 Passive 
+SW7-5 MS-22D28-G020-5 Passive 
+SW7-6 MS-22D28-G020-6 Passive 
+)
+(
+VBAT 
+Q3-3 AO3401A_C15127-D Passive 
+SW7-1 MS-22D28-G020-1 Passive 
+SW7-4 MS-22D28-G020-4 Passive 
+C5-1 CAP_0402-1 Input   
+)
+(
+$3N1 
+Q2-3 AO3400A_C20917-D Passive 
+R12-1 Res_0805-1 Input   
+)
+(
+LCD_LED- 
+R12-2 Res_0805-2 Input   
+FPC2-11 FPC-05FB-12PH20-11 Input   
+)

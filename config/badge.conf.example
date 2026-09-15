@@ -1,0 +1,4 @@
+# Copy to config/badge.conf and set a default display name (badge.conf is gitignored).
+# In badge mode you can also set the name over USB: connect a serial terminal and type
+# your name when prompted (saved to flash; persists across reboots).
+name=Your Name

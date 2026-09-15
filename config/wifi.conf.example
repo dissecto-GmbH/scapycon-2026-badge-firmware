@@ -1,0 +1,4 @@
+# Copy to config/wifi.conf and fill in (wifi.conf is gitignored).
+# Conference defaults (also used for factory_flash.bin when built with --from-conf):
+ssid=ScapyCon2026
+password=CUin2027again

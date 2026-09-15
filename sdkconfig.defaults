@@ -1,0 +1,15 @@
+CONFIG_IDF_TARGET="esp32c5"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# Keep boot/app logs off USB CDC. On ESP32-C5, writing to USB Serial/JTAG
+# before a host is reading wedges the IN endpoint: late picocom attach then
+# has working RX but dead TX. Name setup uses the USB driver explicitly.
+CONFIG_ESP_CONSOLE_UART=y
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
+
+# Link USJ connection monitor + hold clocks even when console is UART.
+# Without this, C5 USB PHY can lose BBPLL and CDC writes time out.
+CONFIG_USJ_NO_AUTO_LS_ON_CONNECTION=y

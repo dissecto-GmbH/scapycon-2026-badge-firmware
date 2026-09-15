@@ -1,0 +1,16 @@
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.old.*
+flashloader/build/
+flashloader/sdkconfig
+flashloader/sdkconfig.old
+flashloader/sdkconfig.old.*
+dependencies.lock
+managed_components/
+.vscode/
+*.pyc
+__pycache__/
+.venv/
+config/wifi.conf
+config/badge.conf
