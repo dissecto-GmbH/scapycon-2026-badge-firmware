@@ -76,6 +76,7 @@ badge2026-v2x/
 │   ├── flash_badge_dual.py    # full flash: bootloader + flashloader + main
 │   ├── make_factory_image.py  # build 4 MiB factory_flash.bin
 │   ├── build_firmware_release.py  # OTA firmware.bin + firmware.ver
+│   ├── ci_build_release.sh        # CI: flashloader + main + factory + OTA artifacts
 │   ├── flash_factory_loop.py  # mass-flash factory image (esptool)
 │   ├── badge_reset.py     # JTAG system reset only (SW_RESET equivalent)
 │   ├── badge_openocd_run.cfg  # OpenOCD helper: esp32c5_app_run

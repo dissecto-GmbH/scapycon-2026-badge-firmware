@@ -53,6 +53,25 @@ and `build/firmware.ver`.
 
 See [`AGENTS.md`](AGENTS.md) for partitions, buttons, and OpenOCD details.
 
+## GitHub Releases (CI)
+
+Pushing a version tag builds both **OTA** and **factory** images with ESP-IDF v6.0.2
+and attaches them to a GitHub Release:
+
+```bash
+git tag v1.1.0
+git push origin v1.1.0
+```
+
+| Asset | Use |
+|-------|-----|
+| `firmware.bin` + `firmware.ver` | OTA update (`PROJECT_VER` = tag without leading `v`) |
+| `factory_flash.bin` | Full 4 MiB factory / reset image |
+| `SHA256SUMS` | Checksums |
+
+Pushes and PRs to `master` also run the same build and upload workflow artifacts.
+Local equivalent: `./tools/ci_build_release.sh` (with IDF env sourced).
+
 ## Legal / RF
 
 Espressif does not officially support 802.11p. ITS-band transmission may be
