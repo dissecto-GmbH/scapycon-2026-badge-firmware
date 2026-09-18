@@ -2,8 +2,8 @@
 # CI / local helper: build flashloader + main, emit OTA + factory release artifacts.
 #
 # Env:
-#   PROJECT_VER   — optional; default UTC YYYY.MM.DD.HH.MM.SS
-#   IDF_PATH      — required (source export.sh first in CI)
+#   PROJECT_VER — optional; default UTC YYYY.MM.DD.HH.MM.SS
+#   IDF_PATH    — required (script will source export.sh if needed)
 #
 # Outputs under build/release/:
 #   firmware.bin, firmware.ver, factory_flash.bin, SHA256SUMS
@@ -17,12 +17,29 @@ if [[ -z "${IDF_PATH:-}" ]]; then
   exit 1
 fi
 
+# Child shells do not inherit idf.py shell functions from a parent export.sh.
+# Always load the env here, then invoke idf.py via the IDF Python + tools script.
+if [[ -f "${IDF_PATH}/export.sh" ]]; then
+  # shellcheck disable=SC1091
+  . "${IDF_PATH}/export.sh"
+fi
+
+idf() {
+  local py="${IDF_PYTHON_ENV_PATH:-}/bin/python"
+  if [[ ! -x "$py" ]]; then
+    py="$(command -v python3)"
+  fi
+  "$py" "${IDF_PATH}/tools/idf.py" "$@"
+}
+
 VER="${PROJECT_VER:-$(date -u +%Y.%m.%d.%H.%M.%S)}"
 export PROJECT_VER="$VER"
 echo "PROJECT_VER=$PROJECT_VER"
+echo "IDF_PATH=$IDF_PATH"
+idf --version || true
 
 # Seed gitignored conf from examples (factory image --from-conf).
-mkdir -p config
+mkdir -p config build
 if [[ ! -f config/wifi.conf ]]; then
   cp config/wifi.conf.example config/wifi.conf
 fi
@@ -38,13 +55,13 @@ fi
 
 echo "==> flashloader (factory)"
 pushd flashloader >/dev/null
-idf.py set-target esp32c5
-idf.py build
+idf set-target esp32c5
+idf build
 popd >/dev/null
 
 echo "==> main app (ota_0) PROJECT_VER=$PROJECT_VER"
-idf.py set-target esp32c5
-idf.py reconfigure build
+idf set-target esp32c5
+idf reconfigure build
 
 test -f build/badge2026_v2x.bin
 test -f flashloader/build/badge2026_flashloader.bin
