@@ -30,6 +30,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    container:
+      image: espressif/idf:v6.0.2
+      options: --user root
     outputs:
       project_ver: ${{ steps.ver.outputs.value }}
 
@@ -41,7 +44,7 @@ jobs:
         id: ver
         shell: bash
         run: |
-          set -euo pipefail
+          set -eo pipefail
           if [[ -n "${{ inputs.project_ver }}" ]]; then
             VER="${{ inputs.project_ver }}"
           elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
@@ -53,14 +56,22 @@ jobs:
           echo "PROJECT_VER=${VER}"
 
       - name: Build OTA + factory image
-        uses: espressif/esp-idf-ci-action@v1
+        shell: bash
         env:
           PROJECT_VER: ${{ steps.ver.outputs.value }}
-        with:
-          esp_idf_version: v6.0.2
-          target: esp32c5
-          path: .
-          command: bash tools/ci_build_release.sh
+        run: |
+          set -eo pipefail
+          echo "PWD=$(pwd)"
+          echo "IDF_PATH=${IDF_PATH:-unset}"
+          ls -la tools/ci_build_release.sh
+          file tools/ci_build_release.sh || true
+          # export.sh is incompatible with nounset
+          set +u
+          . "${IDF_PATH}/export.sh"
+          set -u
+          echo "IDF_PYTHON_ENV_PATH=${IDF_PYTHON_ENV_PATH:-}"
+          python3 "${IDF_PATH}/tools/idf.py" --help >/dev/null
+          bash -x tools/ci_build_release.sh
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
