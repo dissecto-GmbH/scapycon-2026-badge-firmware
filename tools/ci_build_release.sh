@@ -39,7 +39,7 @@ echo "IDF_PATH=$IDF_PATH"
 echo "IDF_PYTHON_ENV_PATH=${IDF_PYTHON_ENV_PATH:-}"
 
 # Seed gitignored conf from examples (factory image --from-conf).
-mkdir -p config build
+mkdir -p config host_artifacts
 if [[ ! -f config/wifi.conf ]]; then
   cp config/wifi.conf.example config/wifi.conf
 fi
@@ -47,10 +47,13 @@ if [[ ! -f config/badge.conf ]]; then
   cp config/badge.conf.example config/badge.conf
 fi
 
-# Background.bin for factory user partition (Pillow preferred; ImageMagick fallback).
+# Keep RGB565 out of build/ — a non-CMake build/ makes idf.py set-target refuse to fullclean.
+BG_BIN="host_artifacts/background.bin"
 python3 -m pip install --quiet 'pillow>=10' || true
+FACTORY_BG_ARGS=()
 if [[ -f background.png ]]; then
-  python3 tools/png_to_background.py background.png -o build/background.bin
+  python3 tools/png_to_background.py background.png -o "${BG_BIN}"
+  FACTORY_BG_ARGS=(--bg "${BG_BIN}")
 fi
 
 echo "==> flashloader (factory)"
@@ -61,6 +64,11 @@ echo "==> flashloader (factory)"
 )
 
 echo "==> main app (ota_0) PROJECT_VER=$PROJECT_VER"
+# Drop a polluted build/ (e.g. only host files) so set-target can recreate it.
+if [[ -d build && ! -f build/CMakeCache.txt ]]; then
+  echo "Removing non-CMake build/ before idf set-target"
+  rm -rf build
+fi
 idf set-target esp32c5
 idf reconfigure build
 
@@ -75,7 +83,7 @@ cp -f build/release/firmware.ver build/firmware.ver
 cp -f build/release/firmware.bin build/firmware.bin
 
 echo "==> factory image"
-python3 tools/make_factory_image.py --from-conf -o build/release/factory_flash.bin
+python3 tools/make_factory_image.py --from-conf "${FACTORY_BG_ARGS[@]}" -o build/release/factory_flash.bin
 cp -f build/release/factory_flash.bin build/factory_flash.bin
 
 (
