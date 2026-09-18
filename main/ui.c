@@ -9,8 +9,10 @@
 #include "display.h"
 #include "esp_lcd_panel_ops.h"
 #include "esp_log.h"
+#include "font8x8_basic.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "its_g5.h"
 #include "power.h"
 #include "radio.h"
 #include "time_sync.h"
@@ -23,7 +25,6 @@ static const char *TAG = "ui";
 #define COLOR_YELLOW 0xFFE0
 #define COLOR_ORANGE 0xFD20
 #define COLOR_WHITE  0xFFFF
-#define COLOR_CYAN   0x07FF
 #define COLOR_BLACK  0x0000
 /* Logo green ≈ #2BAA6F */
 #define COLOR_BRAND  0x2D4D
@@ -40,6 +41,12 @@ static const char *TAG = "ui";
 #define Y_MODE       (Y_TITLE + CHAR_H + 6)
 #define Y_LINE2      (Y_MODE + LINE_H)
 #define Y_LINE3      (Y_LINE2 + LINE_H)
+#define Y_PKT        Y_MODE
+#define Y_CH         Y_LINE2
+#define Y_HEX        Y_LINE3
+#define HEX_SCALE    1
+#define HEX_LINE_H   9
+#define HEX_BPL      16
 
 static esp_lcd_panel_handle_t s_panel;
 
@@ -58,6 +65,135 @@ static int s_drawn_minute = -1; /* hour*60+min of last painted clock; -1 = none 
 
 #define CLOCK_SCALE 2
 #define CLOCK_MARGIN 8
+
+/* 1-bit sniffer framebuffer: 320×240 / 8 ≈ 9.4 KiB — compose, then blit dirty rows only. */
+#define MONO_STRIDE ((BADGE_LCD_H_RES + 7) / 8)
+static uint8_t s_mono_fb[MONO_STRIDE * BADGE_LCD_V_RES];
+static uint8_t s_mono_shown[MONO_STRIDE * BADGE_LCD_V_RES];
+static bool s_sniffer_on_screen;
+
+static void mono_clear(void)
+{
+    memset(s_mono_fb, 0, sizeof(s_mono_fb));
+}
+
+static void mono_set(int x, int y)
+{
+    if ((unsigned)x >= (unsigned)BADGE_LCD_H_RES || (unsigned)y >= (unsigned)BADGE_LCD_V_RES) {
+        return;
+    }
+    s_mono_fb[(size_t)y * MONO_STRIDE + (size_t)(x >> 3)] |= (uint8_t)(1u << (x & 7));
+}
+
+static void mono_draw_glyph(int x, int y, unsigned idx, int scale)
+{
+    if (idx >= UTF8_GLYPH_COUNT) {
+        idx = (unsigned)'?';
+    }
+    const uint8_t *glyph = font8x8_basic[idx];
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            if (!(glyph[row] & (1 << col))) {
+                continue;
+            }
+            for (int sy = 0; sy < scale; sy++) {
+                for (int sx = 0; sx < scale; sx++) {
+                    mono_set(x + col * scale + sx, y + row * scale + sy);
+                }
+            }
+        }
+    }
+}
+
+static void mono_draw_string(int x, int y, const char *str, int scale)
+{
+    if (!str || scale < 1) {
+        return;
+    }
+    int cx = x;
+    while (*str) {
+        uint32_t cp;
+        size_t nb;
+        if (!utf8_next(str, &cp, &nb)) {
+            str++;
+            continue;
+        }
+        mono_draw_glyph(cx, y, utf8_codepoint_to_glyph(cp), scale);
+        cx += 8 * scale + 1;
+        str += nb;
+    }
+}
+
+static const badge_mono_color_band_t s_sniffer_bands[] = {
+    {Y_PKT, Y_PKT + CHAR_H, COLOR_GREEN, COLOR_NAVY},
+    {Y_CH, Y_CH + CHAR_H, COLOR_YELLOW, COLOR_NAVY},
+};
+
+static void sniffer_flush_dirty(void)
+{
+    const size_t nbands = sizeof(s_sniffer_bands) / sizeof(s_sniffer_bands[0]);
+
+    if (!s_sniffer_on_screen) {
+        badge_display_blit_mono(s_panel, s_mono_fb, MONO_STRIDE, 0, BADGE_LCD_V_RES, s_sniffer_bands,
+                                nbands, COLOR_WHITE, COLOR_NAVY);
+        memcpy(s_mono_shown, s_mono_fb, sizeof(s_mono_shown));
+        s_sniffer_on_screen = true;
+        return;
+    }
+
+    int run0 = -1;
+    for (int y = 0; y <= BADGE_LCD_V_RES; y++) {
+        bool dirty = false;
+        if (y < BADGE_LCD_V_RES) {
+            dirty = memcmp(&s_mono_fb[(size_t)y * MONO_STRIDE],
+                           &s_mono_shown[(size_t)y * MONO_STRIDE], MONO_STRIDE) != 0;
+        }
+        if (dirty) {
+            if (run0 < 0) {
+                run0 = y;
+            }
+        } else if (run0 >= 0) {
+            badge_display_blit_mono(s_panel, s_mono_fb, MONO_STRIDE, run0, y, s_sniffer_bands, nbands,
+                                    COLOR_WHITE, COLOR_NAVY);
+            memcpy(&s_mono_shown[(size_t)run0 * MONO_STRIDE], &s_mono_fb[(size_t)run0 * MONO_STRIDE],
+                   (size_t)(y - run0) * MONO_STRIDE);
+            run0 = -1;
+        }
+    }
+}
+
+static void draw_sniffer_screen(void)
+{
+    mono_clear();
+
+    mono_draw_string(TEXT_X, Y_TITLE, "V2X 802.11p Sniffer", TEXT_SCALE);
+
+    char line[40];
+    snprintf(line, sizeof(line), "Packets: %lu", (unsigned long)badge_radio_rx_count());
+    mono_draw_string(TEXT_X, Y_PKT, line, TEXT_SCALE);
+
+    int mhz = badge_radio_its_channel_mhz();
+    snprintf(line, sizeof(line), "Ch: %d MHz %s", mhz, mhz == 5900 ? "G5CC" : "G5SC");
+    mono_draw_string(TEXT_X, Y_CH, line, TEXT_SCALE);
+
+    uint8_t pkt[512];
+    uint16_t len = badge_its_g5_copy_last_packet(pkt, sizeof(pkt));
+    int y = Y_HEX;
+    for (uint16_t off = 0; off < len && y + 8 <= BADGE_LCD_V_RES; off += HEX_BPL) {
+        uint16_t n = (uint16_t)(len - off);
+        if (n > HEX_BPL) {
+            n = HEX_BPL;
+        }
+        for (uint16_t i = 0; i < n; i++) {
+            snprintf(&line[i * 2], 3, "%02X", pkt[off + i]);
+        }
+        line[n * 2] = '\0';
+        mono_draw_string(TEXT_X, y, line, HEX_SCALE);
+        y += HEX_LINE_H;
+    }
+
+    sniffer_flush_dirty();
+}
 
 static const char *const s_day1[] = {
     "ScapyCon 2026 — Day 1",
@@ -122,22 +258,6 @@ static void draw_centered_name(int y, const char *name, int scale, uint16_t fg)
         x = TEXT_X;
     }
     badge_display_draw_string_transparent(s_panel, x, y, name, fg, COLOR_NAVY, scale);
-}
-
-static void draw_sniffer_lines(void)
-{
-    badge_display_draw_line(s_panel, TEXT_X, Y_MODE, TEXT_W, "Mode: 802.11p sniffer", COLOR_CYAN,
-                            COLOR_NAVY, TEXT_SCALE);
-
-    char line[32];
-    snprintf(line, sizeof(line), "Packets: %lu", (unsigned long)badge_radio_rx_count());
-    badge_display_draw_line(s_panel, TEXT_X, Y_LINE2, TEXT_W, line, COLOR_GREEN, COLOR_NAVY,
-                            TEXT_SCALE);
-
-    int mhz = badge_radio_its_channel_mhz();
-    snprintf(line, sizeof(line), "Ch: %d MHz %s", mhz, mhz == 5900 ? "G5CC" : "G5SC");
-    badge_display_draw_line(s_panel, TEXT_X, Y_LINE3, TEXT_W, line, COLOR_YELLOW, COLOR_NAVY,
-                            TEXT_SCALE);
 }
 
 static void draw_schedule(void)
@@ -284,6 +404,9 @@ static void draw_badge_lines(void)
 static void redraw_mode_content(void)
 {
     badge_radio_mode_t mode = badge_radio_get_mode();
+    if (mode != BADGE_RADIO_MODE_SNIFFER) {
+        s_sniffer_on_screen = false;
+    }
     if (mode == BADGE_RADIO_MODE_BADGE) {
         draw_badge_lines();
         return;
@@ -293,10 +416,7 @@ static void redraw_mode_content(void)
         return;
     }
 
-    badge_display_fill(s_panel, 0, 0, BADGE_LCD_H_RES, BADGE_LCD_V_RES, COLOR_NAVY);
-    badge_display_draw_string(s_panel, TEXT_X, Y_TITLE, "Scapycon 2026 V2X", COLOR_WHITE, COLOR_NAVY,
-                              TEXT_SCALE);
-    draw_sniffer_lines();
+    draw_sniffer_screen();
 }
 
 static void ui_capture_state(void)
@@ -353,7 +473,7 @@ static void ui_update(void)
         uint32_t rx = badge_radio_rx_count();
         int ch = badge_radio_its_channel_mhz();
         if (rx != s_ui.rx_count || ch != s_ui.channel_mhz) {
-            draw_sniffer_lines();
+            draw_sniffer_screen();
             s_ui.rx_count = rx;
             s_ui.channel_mhz = ch;
         }

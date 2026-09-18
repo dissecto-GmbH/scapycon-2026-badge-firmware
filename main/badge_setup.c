@@ -10,6 +10,7 @@
 #include "freertos/task.h"
 #include "hal/usb_serial_jtag_ll.h"
 #include "host_link.h"
+#include "user_store.h"
 #include "utf8_name.h"
 #include "usb_mode_cmd.h"
 
@@ -24,6 +25,17 @@ static int64_t s_last_tx_us;
 #define USB_TX_FLUSH_TIMEOUT_US 50000
 #define HOST_POLL_MS            50
 #define HOST_DETACH_POLLS       20
+
+#define SETUP_LINE_MAX USER_STORE_PASS_MAX
+
+typedef enum {
+    SETUP_MENU = 0,
+    SETUP_EDIT_NAME,
+    SETUP_EDIT_SSID,
+    SETUP_EDIT_PASS,
+} setup_state_t;
+
+static setup_state_t s_state;
 
 static bool usb_ready(void)
 {
@@ -76,13 +88,43 @@ static void usb_out(const char *s)
     }
 }
 
-static void print_prompt(void)
+static void print_menu(void)
 {
+    char ssid[USER_STORE_SSID_MAX];
+    char pass[USER_STORE_PASS_MAX];
+    bool wifi_ok = user_store_get_wifi(ssid, sizeof(ssid), pass, sizeof(pass)) == ESP_OK;
+
+    s_state = SETUP_MENU;
     usb_out("\r\n=== Scapycon 2026 Badge ===\r\n");
-    usb_out("Badge mode: type your name and press Enter.\r\n");
-    usb_out("Current name: ");
+    usb_out("Setup console — choose an option:\r\n");
+    usb_out("  1  Name          [");
     usb_out(badge_name_get());
-    usb_out("\r\n> ");
+    usb_out("]\r\n");
+    usb_out("  2  Wi-Fi SSID    [");
+    usb_out(wifi_ok ? ssid : "(not set)");
+    usb_out("]\r\n");
+    usb_out("  3  Wi-Fi key     [");
+    usb_out(wifi_ok && pass[0] ? "set" : "empty");
+    usb_out("]\r\n");
+    usb_out("Enter 1-3: ");
+}
+
+static void print_edit_prompt(void)
+{
+    switch (s_state) {
+    case SETUP_EDIT_NAME:
+        usb_out("\r\nNew name (Enter cancels):\r\n> ");
+        break;
+    case SETUP_EDIT_SSID:
+        usb_out("\r\nNew Wi-Fi SSID (Enter cancels):\r\n> ");
+        break;
+    case SETUP_EDIT_PASS:
+        usb_out("\r\nNew Wi-Fi key (Enter cancels, input hidden):\r\n> ");
+        break;
+    default:
+        print_menu();
+        break;
+    }
 }
 
 static bool read_char(uint8_t *out, TickType_t timeout)
@@ -111,7 +153,7 @@ static void on_host_opened(void)
     s_idle_polls = 0;
     /* Host is polling EP IN — safe to TX. */
     vTaskDelay(pdMS_TO_TICKS(30));
-    print_prompt();
+    print_menu();
 }
 
 static void poll_host_attach(void)
@@ -143,6 +185,136 @@ static void poll_host_attach(void)
     }
 }
 
+static esp_err_t wifi_update_field(bool set_ssid, const char *value)
+{
+    char ssid[USER_STORE_SSID_MAX];
+    char pass[USER_STORE_PASS_MAX];
+    ssid[0] = '\0';
+    pass[0] = '\0';
+
+    const user_store_header_t *hdr = user_store_header();
+    if (hdr) {
+        strlcpy(ssid, hdr->wifi_ssid, sizeof(ssid));
+        strlcpy(pass, hdr->wifi_pass, sizeof(pass));
+    }
+
+    if (set_ssid) {
+        strlcpy(ssid, value, sizeof(ssid));
+    } else {
+        strlcpy(pass, value, sizeof(pass));
+    }
+
+    if (ssid[0] == '\0') {
+        return ESP_ERR_INVALID_ARG;
+    }
+    return user_store_set_wifi(ssid, pass);
+}
+
+static void handle_menu_line(const char *line)
+{
+    if (strcmp(line, "1") == 0) {
+        s_state = SETUP_EDIT_NAME;
+        print_edit_prompt();
+        return;
+    }
+    if (strcmp(line, "2") == 0) {
+        s_state = SETUP_EDIT_SSID;
+        print_edit_prompt();
+        return;
+    }
+    if (strcmp(line, "3") == 0) {
+        s_state = SETUP_EDIT_PASS;
+        print_edit_prompt();
+        return;
+    }
+    usb_out("Unknown option. Enter 1, 2, or 3.\r\n");
+    print_menu();
+}
+
+static void handle_edit_line(const char *line)
+{
+    setup_state_t done = s_state;
+    esp_err_t err = ESP_OK;
+
+    if (!line[0]) {
+        usb_out("Cancelled.\r\n");
+        print_menu();
+        return;
+    }
+
+    switch (done) {
+    case SETUP_EDIT_NAME:
+        err = badge_name_set(line);
+        if (err == ESP_OK) {
+            err = user_store_set_name(badge_name_get());
+        }
+        if (err == ESP_OK) {
+            usb_out("Saved name: ");
+            usb_out(badge_name_get());
+            usb_out("\r\n");
+        } else if (err == ESP_ERR_INVALID_ARG) {
+            usb_out("Name cannot be empty.\r\n");
+        } else {
+            usb_out("Could not save name.\r\n");
+        }
+        break;
+
+    case SETUP_EDIT_SSID:
+        err = wifi_update_field(true, line);
+        if (err == ESP_OK) {
+            usb_out("Saved Wi-Fi SSID: ");
+            usb_out(line);
+            usb_out("\r\n");
+        } else if (err == ESP_ERR_INVALID_ARG) {
+            usb_out("SSID cannot be empty.\r\n");
+        } else {
+            usb_out("Could not save SSID.\r\n");
+        }
+        break;
+
+    case SETUP_EDIT_PASS:
+        err = wifi_update_field(false, line);
+        if (err == ESP_OK) {
+            usb_out("Saved Wi-Fi key.\r\n");
+        } else if (err == ESP_ERR_INVALID_ARG) {
+            usb_out("Set an SSID first (option 2).\r\n");
+        } else {
+            usb_out("Could not save Wi-Fi key.\r\n");
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    print_menu();
+}
+
+static size_t edit_max_len(void)
+{
+    switch (s_state) {
+    case SETUP_EDIT_NAME:
+        return BADGE_NAME_MAX;
+    case SETUP_EDIT_SSID:
+        return USER_STORE_SSID_MAX - 1;
+    case SETUP_EDIT_PASS:
+        return USER_STORE_PASS_MAX - 1;
+    default:
+        return 8;
+    }
+}
+
+static bool edit_allows_utf8(void)
+{
+    return s_state == SETUP_EDIT_NAME;
+}
+
+static void echo_char(char c, bool hide)
+{
+    char echo[2] = {hide ? '*' : c, '\0'};
+    usb_out(echo);
+}
+
 static void setup_task(void *arg)
 {
     (void)arg;
@@ -165,8 +337,9 @@ static void setup_task(void *arg)
 
     s_host_up = false;
     s_idle_polls = 0;
+    s_state = SETUP_MENU;
 
-    char line[BADGE_NAME_MAX + 1];
+    char line[SETUP_LINE_MAX + 1];
     size_t line_len = 0;
     uint8_t utf8_lead = 0;
 
@@ -213,20 +386,16 @@ static void setup_task(void *arg)
             utf8_lead = 0;
             line[line_len] = '\0';
 
-            if (line_len > 0) {
-                esp_err_t err = badge_name_set(line);
-                if (err == ESP_OK) {
-                    usb_out("Saved as: ");
-                    usb_out(badge_name_get());
-                    usb_out("\r\n");
-                } else if (err == ESP_ERR_INVALID_ARG) {
-                    usb_out("Name cannot be empty.\r\n");
+            if (s_state == SETUP_MENU) {
+                if (line_len > 0) {
+                    handle_menu_line(line);
                 } else {
-                    usb_out("Could not save name.\r\n");
+                    print_menu();
                 }
+            } else {
+                handle_edit_line(line);
             }
 
-            print_prompt();
             line_len = 0;
             continue;
         }
@@ -241,15 +410,22 @@ static void setup_task(void *arg)
             continue;
         }
 
+        size_t max_len = edit_max_len();
+        bool hide = (s_state == SETUP_EDIT_PASS);
+
         /* Complete a pending 2-byte UTF-8 sequence (German letters are C3 xx). */
         if (utf8_lead) {
             char pair[3] = {(char)utf8_lead, (char)c, '\0'};
             utf8_lead = 0;
 
+            if (!edit_allows_utf8() || s_state == SETUP_MENU) {
+                continue;
+            }
+
             uint32_t cp;
             size_t nb;
             if (utf8_next(pair, &cp, &nb) && nb == 2 && utf8_name_codepoint_allowed(cp) &&
-                line_len + 2 < sizeof(line)) {
+                line_len + 2 <= max_len && line_len + 2 < sizeof(line)) {
                 line[line_len++] = pair[0];
                 line[line_len++] = pair[1];
                 usb_out(pair);
@@ -257,15 +433,15 @@ static void setup_task(void *arg)
             continue;
         }
 
-        if (c >= 32 && c < 127 && line_len + 1 < sizeof(line)) {
+        if (c >= 32 && c < 127 && line_len + 1 <= max_len && line_len + 1 < sizeof(line)) {
             line[line_len++] = (char)c;
-            char echo[2] = {(char)c, '\0'};
-            usb_out(echo);
+            echo_char((char)c, hide);
             continue;
         }
 
         /* Start of 2-byte UTF-8 (C2/C3); German allowlist uses C3. */
-        if ((c == 0xC2 || c == 0xC3) && line_len + 2 < sizeof(line)) {
+        if (edit_allows_utf8() && (c == 0xC2 || c == 0xC3) && line_len + 2 <= max_len &&
+            line_len + 2 < sizeof(line)) {
             utf8_lead = c;
         }
     }
@@ -288,7 +464,7 @@ esp_err_t badge_setup_start(void)
         return ESP_ERR_NO_MEM;
     }
 
-    ESP_LOGI(TAG, "USB name setup active");
+    ESP_LOGI(TAG, "USB setup console active");
     return ESP_OK;
 }
 
@@ -307,5 +483,5 @@ void badge_setup_stop(void)
         s_task = NULL;
     }
 
-    ESP_LOGI(TAG, "USB name setup stopped");
+    ESP_LOGI(TAG, "USB setup console stopped");
 }

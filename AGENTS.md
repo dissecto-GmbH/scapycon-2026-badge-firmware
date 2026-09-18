@@ -72,8 +72,8 @@ badge2026-v2x/
 │   ├── wifi.conf.example
 │   └── wifi.conf          # gitignored — SSID/password
 ├── tools/
-│   ├── flash_badge.py     # OpenOCD flash + JTAG system reset (no buttons)
-│   ├── flash_badge_dual.py    # flashloader + main via OpenOCD
+│   ├── flash_badge.py     # build + flash main @ ota_0 + JTAG reset
+│   ├── flash_badge_dual.py    # full flash: bootloader + flashloader + main
 │   ├── make_factory_image.py  # build 4 MiB factory_flash.bin
 │   ├── build_firmware_release.py  # OTA firmware.bin + firmware.ver
 │   ├── flash_factory_loop.py  # mass-flash factory image (esptool)
@@ -201,22 +201,23 @@ was unreliable here. Use JTAG reset instead; esptool fallback: `python3 tools/ba
 **Recommended commands** (after `source …/activate_idf_v6.0.2.sh`):
 
 ```bash
-python3 tools/flash_badge.py              # build + flash + JTAG reset
-python3 tools/flash_badge.py --no-build   # flash existing build/ only
+python3 tools/flash_badge.py              # build + flash main @ ota_0 + JTAG reset
+python3 tools/flash_badge.py --no-build   # flash existing build/badge2026_v2x.bin only
+python3 tools/flash_badge_dual.py         # full: bootloader + table + flashloader + main
 python3 tools/badge_reset.py              # JTAG reset only (reboot app)
 python3 tools/badge_reset.py --esptool    # fallback via esptool watchdog reset
 ```
 
-**Manual OpenOCD** (single session):
+**Manual OpenOCD** (main app only, dual layout):
 
 ```bash
 cd build && openocd -f board/esp32c5-builtin.cfg -f ../tools/badge_openocd_run.cfg \
-  -c "program_esp_bins . flasher_args.json verify" \
+  -c "program_esp badge2026_v2x.bin 0x160000 verify" \
   -c "esp32c5_app_run" \
   -c "shutdown"
 ```
 
-Do **not** pass `reset` to `program_esp_bins`.
+Do **not** use `program_esp_bins` / `flasher_args.json` on this layout — that would write the main app at factory `0x20000`.
 
 ## Flashing and Debug
 

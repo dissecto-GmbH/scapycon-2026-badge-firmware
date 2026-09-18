@@ -31,6 +31,11 @@ static uint32_t s_packet_count;
 static bool s_running;
 static int s_channel_mhz = BADGE_ITS_G5_CHANNEL_MHZ;
 
+/* Latest frame for UI hex dump — updated in export_task, never in the RX cb. */
+static uint8_t s_last_frame[512];
+static uint16_t s_last_frame_len;
+static portMUX_TYPE s_last_frame_mux = portMUX_INITIALIZER_UNLOCKED;
+
 /* ETSI ITS-G5 5.9 GHz channels (10 MHz), G5CC = 5900. */
 static const int s_its_channels_mhz[] = {5860, 5870, 5880, 5890, 5900, 5910, 5920};
 
@@ -120,6 +125,11 @@ static void export_task(void *arg)
         if (xQueueReceive(s_frame_queue, &frame, portMAX_DELAY) != pdTRUE) {
             continue;
         }
+        portENTER_CRITICAL(&s_last_frame_mux);
+        memcpy(s_last_frame, frame.data, frame.length);
+        s_last_frame_len = frame.length;
+        portEXIT_CRITICAL(&s_last_frame_mux);
+
         s_packet_count++;
         badge_host_link_send_rx_frame(frame.data, frame.length, frame.rssi, frame.channel);
         ESP_LOGD(TAG, "#%" PRIu32 " rssi=%d len=%u", s_packet_count, frame.rssi, frame.length);
@@ -177,4 +187,23 @@ esp_err_t badge_its_g5_sniffer_stop(void)
 uint32_t badge_its_g5_packet_count(void)
 {
     return s_packet_count;
+}
+
+uint16_t badge_its_g5_copy_last_packet(uint8_t *out, uint16_t max_len)
+{
+    if (!out || max_len == 0) {
+        return 0;
+    }
+
+    uint16_t n;
+    portENTER_CRITICAL(&s_last_frame_mux);
+    n = s_last_frame_len;
+    if (n > max_len) {
+        n = max_len;
+    }
+    if (n > 0) {
+        memcpy(out, s_last_frame, n);
+    }
+    portEXIT_CRITICAL(&s_last_frame_mux);
+    return n;
 }

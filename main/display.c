@@ -470,3 +470,56 @@ void badge_display_draw_line(esp_lcd_panel_handle_t panel, int x, int y, int w, 
     badge_display_fill(panel, x, y, w, h, bg);
     badge_display_draw_string(panel, x, y, str, fg, bg, scale);
 }
+
+void badge_display_blit_mono(esp_lcd_panel_handle_t panel, const uint8_t *mono, int stride_bytes,
+                             int y0, int y1, const badge_mono_color_band_t *bands, size_t nbands,
+                             uint16_t default_fg, uint16_t default_bg)
+{
+    if (!s_ready || !panel || !mono || stride_bytes <= 0 || !s_fill_buf) {
+        return;
+    }
+    if (y0 < 0) {
+        y0 = 0;
+    }
+    if (y1 > BADGE_LCD_V_RES) {
+        y1 = BADGE_LCD_V_RES;
+    }
+    if (y0 >= y1) {
+        return;
+    }
+
+    uint16_t def_fg = rgb565_be(default_fg);
+    uint16_t def_bg = rgb565_be(default_bg);
+
+    for (int y = y0; y < y1;) {
+        int strip_h = y1 - y;
+        if (strip_h > FILL_STRIP_LINES) {
+            strip_h = FILL_STRIP_LINES;
+        }
+
+        for (int row = 0; row < strip_h; row++) {
+            int py = y + row;
+            uint16_t fg = def_fg;
+            uint16_t bg = def_bg;
+            if (bands) {
+                for (size_t i = 0; i < nbands; i++) {
+                    if (py >= bands[i].y0 && py < bands[i].y1) {
+                        fg = rgb565_be(bands[i].fg);
+                        bg = rgb565_be(bands[i].bg);
+                        break;
+                    }
+                }
+            }
+
+            const uint8_t *src = mono + (size_t)py * (size_t)stride_bytes;
+            uint16_t *dst = s_fill_buf + (size_t)row * (size_t)BADGE_LCD_H_RES;
+            for (int x = 0; x < BADGE_LCD_H_RES; x++) {
+                uint8_t bit = (uint8_t)((src[x >> 3] >> (x & 7)) & 1u);
+                dst[x] = bit ? fg : bg;
+            }
+        }
+
+        draw_bitmap_sync(panel, 0, y, BADGE_LCD_H_RES, y + strip_h, s_fill_buf);
+        y += strip_h;
+    }
+}

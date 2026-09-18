@@ -11,6 +11,13 @@ esp_err_t badge_its_g5_sniffer_start(void);
 esp_err_t badge_its_g5_sniffer_stop(void);
 uint32_t badge_its_g5_packet_count(void);
 
+/**
+ * Copy the most recent RX frame into out (truncated to max_len).
+ * Safe to call from the UI task; never call from the promiscuous RX callback.
+ * Returns the number of bytes copied (0 if none yet).
+ */
+uint16_t badge_its_g5_copy_last_packet(uint8_t *out, uint16_t max_len);
+
 /** Currently selected ITS frequency in MHz (updated by cycle while sniffing). */
 int badge_its_g5_get_channel_mhz(void);
 

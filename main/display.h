@@ -26,4 +26,24 @@ int badge_display_draw_string_transparent(esp_lcd_panel_handle_t panel, int x, i
                                           uint16_t fg, uint16_t fallback_bg, int scale);
 void badge_display_draw_line(esp_lcd_panel_handle_t panel, int x, int y, int w, const char *str,
                              uint16_t fg, uint16_t bg, int scale);
+
+/**
+ * Color band for badge_display_blit_mono: rows [y0, y1) use fg/bg.
+ * First matching band wins; rows outside all bands use the blit defaults.
+ */
+typedef struct {
+    int y0;
+    int y1;
+    uint16_t fg;
+    uint16_t bg;
+} badge_mono_color_band_t;
+
+/**
+ * Push rows [y0, y1) of a 1-bit framebuffer (1 = ink) to the panel.
+ * mono is row-major, stride_bytes bytes per row, LSB = leftmost pixel in each byte.
+ */
+void badge_display_blit_mono(esp_lcd_panel_handle_t panel, const uint8_t *mono, int stride_bytes,
+                             int y0, int y1, const badge_mono_color_band_t *bands, size_t nbands,
+                             uint16_t default_fg, uint16_t default_bg);
+
 void badge_display_set_brightness(uint8_t percent);

@@ -2,9 +2,9 @@
 """
 Verify badge-mode USB serial TX and RX on /dev/ttyACM0.
 
-Checks that the name-setup prompt appears (TX) and that a test name is accepted
-(RX) with a "Saved as:" response (TX again). Use --loop to retry until both
-directions work or --max-attempts is exhausted.
+Checks that the setup-console menu appears (TX) and that option 1 + a test name
+are accepted (RX) with a "Saved name:" response (TX again). Use --loop to retry
+until both directions work or --max-attempts is exhausted.
 """
 
 from __future__ import annotations
@@ -22,7 +22,8 @@ except ImportError:
     raise SystemExit("Install pyserial: pip install pyserial")
 
 BANNER = b"Scapycon 2026 Badge"
-SAVED = b"Saved as:"
+MENU = b"Enter 1-3:"
+SAVED = b"Saved name:"
 TEST_NAME = "usbloop"
 
 
@@ -66,7 +67,7 @@ def wait_for_prompt(ser: serial.Serial, io_timeout_s: float) -> tuple[bool, byte
         chunk = ser.read(4096)
         if chunk:
             collected.extend(chunk)
-        if BANNER in collected or b">" in collected:
+        if BANNER in collected or MENU in collected or b"Enter 1-3:" in collected:
             return True, collected
     return False, collected
 
@@ -100,13 +101,16 @@ def serial_roundtrip(port: str, settle_s: float, io_timeout_s: float) -> tuple[b
                 return False, "host write timeout on wake", bytes(collected)
             time.sleep(0.25)
             drain()
-            if BANNER in collected or b">" in collected:
+            if BANNER in collected or MENU in collected:
                 break
 
-        if BANNER not in collected and b">" not in collected:
-            return False, "TX fail: no banner/prompt", bytes(collected)
+        if BANNER not in collected and MENU not in collected:
+            return False, "TX fail: no banner/menu", bytes(collected)
 
         try:
+            ser.write(b"1\n")
+            time.sleep(0.3)
+            drain()
             ser.write(f"{TEST_NAME}\n".encode())
         except serial.SerialTimeoutException:
             return False, "host write timeout on name", bytes(collected)
@@ -214,6 +218,9 @@ def serial_reopen_test(port: str, settle_s: float, io_timeout_s: float) -> tuple
         if not ok2:
             return False, "reopen: no prompt (late attach broken)"
 
+        ser.write(b"1\n")
+        time.sleep(0.3)
+        buf2.extend(ser.read(4096))
         ser.write(f"{TEST_NAME}\n".encode())
         time.sleep(1.5)
         buf2.extend(ser.read(4096))

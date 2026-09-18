@@ -7,6 +7,7 @@
 #include "esp_log.h"
 #include "nvs.h"
 #include "nvs_flash.h"
+#include "user_store.h"
 #include "utf8_name.h"
 
 static const char *TAG = "badge_name";
@@ -67,6 +68,15 @@ esp_err_t badge_name_init(void)
         nvs_close(h);
         if (err == ESP_OK && s_name[0] != '\0') {
             ESP_LOGI(TAG, "loaded name from NVS: %s", s_name);
+            return ESP_OK;
+        }
+    }
+
+    char from_user[USER_STORE_NAME_MAX];
+    if (user_store_get_name(from_user, sizeof(from_user)) == ESP_OK) {
+        sanitize_name(s_name, sizeof(s_name), from_user);
+        if (s_name[0] != '\0') {
+            ESP_LOGI(TAG, "loaded name from user partition: %s", s_name);
             return ESP_OK;
         }
     }
