@@ -1,11 +1,6 @@
 # Build ESP32-C5 badge firmware (OTA update + full factory image) and publish
 # GitHub Releases on version tags.
 #
-# Triggers:
-#   - push / PR → build + upload workflow artifacts
-#   - tag v*    → GitHub Release with firmware.bin, firmware.ver, factory_flash.bin
-#   - workflow_dispatch → same as push (optional PROJECT_VER input)
-#
 # Create a release:
 #   git tag v1.1.0 && git push origin v1.1.0
 
@@ -31,16 +26,10 @@ concurrency:
   group: firmware-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  IDF_VERSION: v6.0.2
-
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    container:
-      image: espressif/idf:v6.0.2
-      options: --user root
     outputs:
       project_ver: ${{ steps.ver.outputs.value }}
 
@@ -64,14 +53,14 @@ jobs:
           echo "PROJECT_VER=${VER}"
 
       - name: Build OTA + factory image
-        shell: bash
+        uses: espressif/esp-idf-ci-action@v1
         env:
           PROJECT_VER: ${{ steps.ver.outputs.value }}
-        run: |
-          set -euo pipefail
-          echo "IDF_PATH=${IDF_PATH:-unset}"
-          ls -la "${IDF_PATH}/tools/idf.py"
-          bash tools/ci_build_release.sh
+        with:
+          esp_idf_version: v6.0.2
+          target: esp32c5
+          path: .
+          command: bash tools/ci_build_release.sh
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
